@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@RequestMapping("/v1/voiceboat/api-tools")
+@RequestMapping("/v1/mcp/api-tools")
 @Tag(name = "API Tools", description = "management APIs.")
 public interface ApiToolApi extends Api {
 

@@ -37,10 +37,7 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
-<!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -69,10 +66,6 @@
             <groupId>io.mongock</groupId>
             <artifactId>mongodb-springdata-v4-driver</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.commons</groupId>-->
-<!--            <artifactId>commons-csv</artifactId>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.ai</groupId>
@@ -88,10 +81,6 @@
             <artifactId>spring-ai-starter-model-openai</artifactId>
         </dependency> -->
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.ai</groupId>-->
 <!--            <artifactId>spring-ai-starter-model-anthropic</artifactId>-->
@@ -119,11 +108,6 @@
             <groupId>io.github.officiallysingh</groupId>
             <artifactId>spring-boot-problem-handler</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>ai.whilter</groupId>-->
-<!--            <artifactId>mcp-model</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>

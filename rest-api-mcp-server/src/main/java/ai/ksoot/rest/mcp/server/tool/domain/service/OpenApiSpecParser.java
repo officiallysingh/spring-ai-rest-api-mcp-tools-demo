@@ -72,7 +72,10 @@ public class OpenApiSpecParser {
       }
     }
 
-    System.out.println(apiToolCallbacks);
+//    System.out.println(apiToolCallbacks);
+    log.debug("--------------------  Parsed API Tool Callbacks  --------------------");
+    log.debug(apiToolCallbacks.toString());
+    log.debug("---------------------------------------------------------------------");
 
     return apiToolCallbacks;
   }
@@ -252,8 +255,8 @@ public class OpenApiSpecParser {
         } else if (StringUtils.isNotBlank(schema.getItems().get$ref())) {
           String ref = schema.getItems().get$ref();
           String itemClassName = ref.substring(ref.lastIndexOf('/') + 1);
-          String itemArgName =
-              itemClassName.substring(0, 1).toLowerCase() + itemClassName.substring(1);
+//          String itemArgName =
+//              itemClassName.substring(0, 1).toLowerCase() + itemClassName.substring(1);
           final Schema<?> itemSchema = components.getSchemas().get(itemClassName);
           //          itemsNode.put(Attributes.TYPE, Attributes.OBJECT);
           //          final ObjectNode properties = objectNode.putObject(Attributes.PROPERTIES);

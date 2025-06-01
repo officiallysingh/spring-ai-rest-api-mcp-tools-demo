@@ -20,17 +20,9 @@ spring:
 #  main:
 #    banner-mode: off
 #    web-application-type: none
-  devtools:
-    add-properties: false
-    restart:
-      enabled: false
-      exclude: logs/*,application.log,*.log,*.log.*
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
-      #      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
-      #      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
-      - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
       - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
 
   messages:
@@ -65,20 +57,8 @@ spring:
         toolcallback.enabled: true
         sse.connections:
           rest-api-mcp-server:
-            url: http://localhost:8080
+            url: http://localhost:8090
         request-timeout: 5m
-
-#------------------------- Swagger configuration -------------------------
-#springdoc:
-#  show-actuator: true
-#  group-configs:
-#    - group: actuator
-#      display-name: Actuator
-#      paths-to-match: /actuator/**
-#    - group: airline
-#      display-name: Airline
-#      paths-to-match: /**
-#      paths-to-exclude: /actuator/**
 
 problem:
   type-url: http://localhost:${server.port}/problems/help.html
@@ -87,26 +67,10 @@ problem:
   cause-chains-enabled: false
 
 server:
-  port: 8080
+  port: 8091
   forward-headers-strategy: framework
 #    servlet:
 #        context-path: /api
-
-#------------------------- Actuators configuration -------------------------
-# If not specified '/actuator' is taken as default. If specified must start with '/'
-#management.endpoints.web.base-path=/
-# Set it as "*", if you want to expose all actuator endpoints
-management:
-  endpoint:
-    health:
-      access: read_only
-  endpoints:
-    web:
-      exposure:
-        include: info,health,metrics
-  metrics:
-    tags:
-      application: ${spring.application.name}
 
 logging:
   file:

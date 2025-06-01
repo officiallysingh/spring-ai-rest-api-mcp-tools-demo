@@ -4,50 +4,48 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
-import org.springframework.ai.chat.memory.ChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
-import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
+import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 
 @Slf4j
 @Configuration
 public class McpClientConfig {
 
-  //    @Bean
-  //    ChatClient chatClient(
-  //            final ChatClient.Builder chatClientBuilder, final McpSyncClient mcpSyncClient) {
-  //        return chatClientBuilder
-  //                .defaultSystem(Prompts.SYSTEM)
-  //                .defaultTools(new SyncMcpToolCallbackProvider(mcpSyncClient))
-  //                .defaultAdvisors(
-  //                        new PromptChatMemoryAdvisor(new InMemoryChatMemory()), new
-  // SimpleLoggerAdvisor())
-  //                .build();
-  //    }
   @Bean
-  @Lazy
   ChatClient chatClient(
-      final ChatClient.Builder chatClientBuilder,
-      final SyncMcpToolCallbackProvider syncMcpToolCallbackProvider,
-      final ChatMemoryRepository chatMemoryRepository
-      //            ,final ToolCallbackProvider toolCallbackProvider
-      ) {
-    //    ChatMemory chatMemory =
-    //        MessageWindowChatMemory.builder()
-    //            .chatMemoryRepository(chatMemoryRepository)
-    //            .maxMessages(10)
-    //            .build();
+      final ChatClient.Builder chatClientBuilder, final ToolCallbackProvider tools) {
     return chatClientBuilder
         .defaultSystem(Prompts.SYSTEM)
-        .defaultTools(syncMcpToolCallbackProvider)
-        //                .defaultTools(toolCallbackProvider)
+        .defaultToolCallbacks(tools.getToolCallbacks())
         .defaultAdvisors(
             MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build(),
             new SimpleLoggerAdvisor())
         .build();
   }
+  //  @Bean
+  //  @Lazy
+  //  ChatClient chatClient(
+  //      final ChatClient.Builder chatClientBuilder,
+  //      final SyncMcpToolCallbackProvider syncMcpToolCallbackProvider,
+  //      final ChatMemoryRepository chatMemoryRepository
+  //      //            ,final ToolCallbackProvider toolCallbackProvider
+  //      ) {
+  //    //    ChatMemory chatMemory =
+  //    //        MessageWindowChatMemory.builder()
+  //    //            .chatMemoryRepository(chatMemoryRepository)
+  //    //            .maxMessages(10)
+  //    //            .build();
+  //    return chatClientBuilder
+  //        .defaultSystem(Prompts.SYSTEM)
+  //        .defaultTools(syncMcpToolCallbackProvider)
+  //        //                .defaultTools(toolCallbackProvider)
+  //        .defaultAdvisors(
+  //            MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build(),
+  //            new SimpleLoggerAdvisor())
+  //        .build();
+  //  }
 
   //    @Bean
   //    ToolCallbackResolver toolCallbackResolver(GenericApplicationContext applicationContext,

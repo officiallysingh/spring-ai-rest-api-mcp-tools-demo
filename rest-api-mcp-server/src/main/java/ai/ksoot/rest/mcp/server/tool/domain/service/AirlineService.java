@@ -1,4 +1,4 @@
-// package ai.whilter.voiceboat.mcp.server.tool.domain.service;
+// package ai.ksoot.rest.mcp.server.tool.domain.service;
 //
 // import com.ksoot.airline.domain.model.*;
 // import org.springframework.ai.tool.annotation.Tool;

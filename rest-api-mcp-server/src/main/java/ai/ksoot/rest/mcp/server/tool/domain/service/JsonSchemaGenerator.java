@@ -14,7 +14,7 @@
 // * limitations under the License.
 // */
 //
-// package ai.whilter.voiceboat.mcp.server.tool.domain.service;
+// package ai.ksoot.rest.mcp.server.tool.domain.service;
 //
 // import com.fasterxml.jackson.annotation.JsonProperty;
 // import com.fasterxml.jackson.annotation.JsonPropertyDescription;

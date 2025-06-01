@@ -72,7 +72,7 @@ problem:
   cause-chains-enabled: false
 
 server:
-  port: 8090
+  port: 8092
   forward-headers-strategy: framework
 #    servlet:
 #        context-path: /api
