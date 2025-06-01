@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AirShoppingRS EchoToken="INTERLINEnull" TimeStamp="2018-01-26T11:37:20.403+02:00" Version="IATA2017.2" TransactionIdentifier="76c656caf62a4efb8fac7972c9631cc7" xmlns="http://www.iata.org/IATA/EDIST/2017.2">
+	<Document>
+		<Name>ATHENA NDC GATEWAY</Name>
+		<ReferenceVersion>20180126_104244</ReferenceVersion>
+	</Document>
+	<Success/>
+	<AirShoppingProcessing/>
+	<ShoppingResponseID>
+		<ResponseID>201-76c656caf62a4efb8fac7972c9631cc7</ResponseID>
+	</ShoppingResponseID>
+	<OffersGroup>
+		<AllOffersSnapshot>
+			<PassengerQuantity>1</PassengerQuantity>
+			<MatchedOfferQuantity>7</MatchedOfferQuantity>
+		</AllOffersSnapshot>
+		<AirlineOffers>
+			<Offer OfferID="OFFER1" Owner="9A">
+				<TimeLimits>
+					<OfferExpiration Timestamp="2018-01-26T10:35:40.498Z"/>
+				</TimeLimits>
+				<FlightsOverview>
+					<FlightRef>FL_CDGDXB_1</FlightRef>
+					<ItineraryPriceClassRef>PC1</ItineraryPriceClassRef>
+				</FlightsOverview>
+				<OfferItem OfferItemID="OFFERITEM1_1">
+					<TotalPriceDetail>
+						<TotalAmount>
+							<SimpleCurrencyPrice Code="USD">807.19</SimpleCurrencyPrice>
+						</TotalAmount>
+						<BaseAmount Code="USD">437.00</BaseAmount>
+						<Taxes>
+							<Total Code="USD">370.19</Total>
+						</Taxes>
+					</TotalPriceDetail>
+					<Service ServiceID="SV1_1_SV_1013_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1013_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1020_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1020_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1018_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1018_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1014_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1014_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1017_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1017_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1012_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1012_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1021_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1021_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1023_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1023_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1019_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1019_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1011_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1011_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1022_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1022_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1009_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1009_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV1_1_SV_1010_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1010_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="FL1_1_FL_CDGDXB_1_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<FlightRefs>FL_CDGDXB_1</FlightRefs>
+					</Service>
+				</OfferItem>
+			</Offer>
+			<Offer OfferID="OFFER2" Owner="9A">
+				<TimeLimits>
+					<OfferExpiration Timestamp="2018-01-26T10:35:40.498Z"/>
+				</TimeLimits>
+				<FlightsOverview>
+					<FlightRef>FL_CDGDXB_1</FlightRef>
+					<ItineraryPriceClassRef>PC2</ItineraryPriceClassRef>
+				</FlightsOverview>
+				<OfferItem OfferItemID="OFFERITEM2_1">
+					<TotalPriceDetail>
+						<TotalAmount>
+							<SimpleCurrencyPrice Code="USD">757.19</SimpleCurrencyPrice>
+						</TotalAmount>
+						<BaseAmount Code="USD">387.00</BaseAmount>
+						<Taxes>
+							<Total Code="USD">370.19</Total>
+						</Taxes>
+					</TotalPriceDetail>
+					<Service ServiceID="SV2_1_SV_1013_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1013_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1020_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1020_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1018_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1018_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1014_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1014_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1017_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1017_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1012_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1012_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1021_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1021_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1023_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1023_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1019_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1019_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1011_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1011_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1022_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1022_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1009_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1009_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV2_1_SV_1010_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1010_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="FL2_1_FL_CDGDXB_1_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<FlightRefs>FL_CDGDXB_1</FlightRefs>
+					</Service>
+				</OfferItem>
+			</Offer>
+			<Offer OfferID="OFFER3" Owner="9A">
+				<TimeLimits>
+					<OfferExpiration Timestamp="2018-01-26T10:35:40.498Z"/>
+				</TimeLimits>
+				<FlightsOverview>
+					<FlightRef>FL_CDGDXB_1</FlightRef>
+					<ItineraryPriceClassRef>PC3</ItineraryPriceClassRef>
+				</FlightsOverview>
+				<OfferItem OfferItemID="OFFERITEM3_1">
+					<TotalPriceDetail>
+						<TotalAmount>
+							<SimpleCurrencyPrice Code="USD">957.19</SimpleCurrencyPrice>
+						</TotalAmount>
+						<BaseAmount Code="USD">587.00</BaseAmount>
+						<Taxes>
+							<Total Code="USD">370.19</Total>
+						</Taxes>
+					</TotalPriceDetail>
+					<Service ServiceID="SV3_1_SV_1013_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1013_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1020_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1020_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1018_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1018_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1014_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1014_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1017_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1017_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1012_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1012_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1021_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1021_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1023_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1023_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1019_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1019_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1011_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1011_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1022_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1022_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1009_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1009_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV3_1_SV_1010_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_CDGDXB_1">SV_1010_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="FL3_1_FL_CDGDXB_1_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<FlightRefs>FL_CDGDXB_1</FlightRefs>
+					</Service>
+				</OfferItem>
+			</Offer>
+			<Offer OfferID="OFFER4" Owner="9A">
+				<TimeLimits>
+					<OfferExpiration Timestamp="2018-01-26T10:35:40.498Z"/>
+				</TimeLimits>
+				<FlightsOverview>
+					<FlightRef>FL_DXBFRA_2</FlightRef>
+					<ItineraryPriceClassRef>PC1</ItineraryPriceClassRef>
+				</FlightsOverview>
+				<OfferItem OfferItemID="OFFERITEM4_1">
+					<TotalPriceDetail>
+						<TotalAmount>
+							<SimpleCurrencyPrice Code="USD">807.19</SimpleCurrencyPrice>
+						</TotalAmount>
+						<BaseAmount Code="USD">437.00</BaseAmount>
+						<Taxes>
+							<Total Code="USD">370.19</Total>
+						</Taxes>
+					</TotalPriceDetail>
+					<Service ServiceID="SV4_1_SV_1013_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1013_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1020_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1020_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1018_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1018_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1014_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1014_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1017_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1017_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1012_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1012_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1021_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1021_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1023_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1023_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1019_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1019_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1011_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1011_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1022_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1022_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1009_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1009_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV4_1_SV_1010_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1010_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="FL4_1_FL_DXBFRA_2_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<FlightRefs>FL_DXBFRA_2</FlightRefs>
+					</Service>
+				</OfferItem>
+			</Offer>
+			<Offer OfferID="OFFER5" Owner="9A">
+				<TimeLimits>
+					<OfferExpiration Timestamp="2018-01-26T10:35:40.498Z"/>
+				</TimeLimits>
+				<FlightsOverview>
+					<FlightRef>FL_DXBFRA_2</FlightRef>
+					<ItineraryPriceClassRef>PC2</ItineraryPriceClassRef>
+				</FlightsOverview>
+				<OfferItem OfferItemID="OFFERITEM5_1">
+					<TotalPriceDetail>
+						<TotalAmount>
+							<SimpleCurrencyPrice Code="USD">757.19</SimpleCurrencyPrice>
+						</TotalAmount>
+						<BaseAmount Code="USD">387.00</BaseAmount>
+						<Taxes>
+							<Total Code="USD">370.19</Total>
+						</Taxes>
+					</TotalPriceDetail>
+					<Service ServiceID="SV5_1_SV_1013_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1013_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1020_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1020_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1018_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1018_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1014_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1014_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1017_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1017_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1012_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1012_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1021_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1021_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1023_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1023_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1019_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1019_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1011_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1011_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1022_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1022_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1009_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1009_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV5_1_SV_1010_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1010_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="FL5_1_FL_DXBFRA_2_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<FlightRefs>FL_DXBFRA_2</FlightRefs>
+					</Service>
+				</OfferItem>
+			</Offer>
+			<Offer OfferID="OFFER6" Owner="9A">
+				<TimeLimits>
+					<OfferExpiration Timestamp="2018-01-26T10:35:40.498Z"/>
+				</TimeLimits>
+				<FlightsOverview>
+					<FlightRef>FL_DXBFRA_2</FlightRef>
+					<ItineraryPriceClassRef>PC3</ItineraryPriceClassRef>
+				</FlightsOverview>
+				<OfferItem OfferItemID="OFFERITEM6_1">
+					<TotalPriceDetail>
+						<TotalAmount>
+							<SimpleCurrencyPrice Code="USD">957.19</SimpleCurrencyPrice>
+						</TotalAmount>
+						<BaseAmount Code="USD">587.00</BaseAmount>
+						<Taxes>
+							<Total Code="USD">370.19</Total>
+						</Taxes>
+					</TotalPriceDetail>
+					<Service ServiceID="SV6_1_SV_1013_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1013_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1020_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1020_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1018_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1018_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1014_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1014_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1017_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1017_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1012_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1012_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1021_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1021_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1023_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1023_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1019_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1019_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1011_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1011_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1022_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1022_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1009_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1009_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="SV6_1_SV_1010_ALL_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<ServiceDefinitionRef SegmentRefs="SEG_DXBFRA_2">SV_1010_ALL</ServiceDefinitionRef>
+					</Service>
+					<Service ServiceID="FL6_1_FL_DXBFRA_2_SH1">
+						<PassengerRefs>SH1</PassengerRefs>
+						<FlightRefs>FL_DXBFRA_2</FlightRefs>
+					</Service>
+				</OfferItem>
+			</Offer>
+			<ALaCarteOffer OfferID="ALaCarteOfferID_1" Owner="9A">
+				<TimeLimits>
+					<OfferExpiration Timestamp="2018-01-26T10:35:40.498Z"/>
+				</TimeLimits>
+				<ALaCarteOfferItem OfferItemID="OfferItemID1">
+					<Eligibility>
+						<PassengerRefs>SH1</PassengerRefs>
+						<SegmentRefs>SEG_DXBFRA_2 SEG_CDGDXB_1</SegmentRefs>
+						<PriceClassRefs>PC3 PC2 PC1</PriceClassRefs>
+					</Eligibility>
+					<UnitPriceDetail>
+						<TotalAmount>
+							<SimpleCurrencyPrice Code="USD">65.00</SimpleCurrencyPrice>
+						</TotalAmount>
+					</UnitPriceDetail>
+					<Service ServiceID="SV_1024_1">
+						<ServiceDefinitionRef>SV_1024_ALL</ServiceDefinitionRef>
+					</Service>
+				</ALaCarteOfferItem>
+			</ALaCarteOffer>
+		</AirlineOffers>
+	</OffersGroup>
+	<DataLists>
+		<PassengerList>
+			<Passenger PassengerID="SH1">
+				<PTC>ADT</PTC>
+			</Passenger>
+		</PassengerList>
+		<FlightSegmentList>
+			<FlightSegment SegmentKey="SEG_CDGDXB_1">
+				<Departure>
+					<AirportCode>CDG</AirportCode>
+					<Date>2018-01-30</Date>
+					<Time>19:20</Time>
+					<AirportName>Charles de Gaulle Airport</AirportName>
+				</Departure>
+				<Arrival>
+					<AirportCode>DXB</AirportCode>
+					<Date>2018-01-31</Date>
+					<Time>03:30</Time>
+					<AirportName>Dubai International Airport</AirportName>
+				</Arrival>
+				<MarketingCarrier>
+					<AirlineID>9A</AirlineID>
+					<FlightNumber>906</FlightNumber>
+				</MarketingCarrier>
+				<OperatingCarrier>
+					<AirlineID>9A</AirlineID>
+					<FlightNumber>906</FlightNumber>
+				</OperatingCarrier>
+				<Equipment>
+					<AircraftCode>319</AircraftCode>
+					<Name>A319</Name>
+				</Equipment>
+				<FlightDetail>
+					<FlightDistance>
+						<Value>5239</Value>
+						<UOM>Kilometers</UOM>
+					</FlightDistance>
+					<FlightDuration>
+						<Value>P0DT5H10M0S</Value>
+					</FlightDuration>
+				</FlightDetail>
+			</FlightSegment>
+			<FlightSegment SegmentKey="SEG_DXBFRA_2">
+				<Departure>
+					<AirportCode>DXB</AirportCode>
+					<Date>2018-02-06</Date>
+					<Time>08:20</Time>
+					<AirportName>Dubai International Airport</AirportName>
+				</Departure>
+				<Arrival>
+					<AirportCode>FRA</AirportCode>
+					<Date>2018-02-06</Date>
+					<Time>10:30</Time>
+					<AirportName>Frankfurt Airport</AirportName>
+				</Arrival>
+				<MarketingCarrier>
+					<AirlineID>9A</AirlineID>
+					<FlightNumber>907</FlightNumber>
+				</MarketingCarrier>
+				<OperatingCarrier>
+					<AirlineID>9A</AirlineID>
+					<FlightNumber>907</FlightNumber>
+				</OperatingCarrier>
+				<Equipment>
+					<AircraftCode>319</AircraftCode>
+					<Name>A319</Name>
+				</Equipment>
+				<FlightDetail>
+					<FlightDistance>
+						<Value>4843</Value>
+						<UOM>Kilometers</UOM>
+					</FlightDistance>
+					<FlightDuration>
+						<Value>P0DT5H10M0S</Value>
+					</FlightDuration>
+				</FlightDetail>
+			</FlightSegment>
+		</FlightSegmentList>
+		<FlightList>
+			<Flight FlightKey="FL_CDGDXB_1">
+				<Journey>
+					<Time>P0DT5H10M0S</Time>
+					<Distance>
+						<Value>5239</Value>
+						<UOM>Kilometers</UOM>
+					</Distance>
+				</Journey>
+				<SegmentReferences>SEG_CDGDXB_1</SegmentReferences>
+			</Flight>
+			<Flight FlightKey="FL_DXBFRA_2">
+				<Journey>
+					<Time>P0DT5H10M0S</Time>
+					<Distance>
+						<Value>4843</Value>
+						<UOM>Kilometers</UOM>
+					</Distance>
+				</Journey>
+				<SegmentReferences>SEG_DXBFRA_2</SegmentReferences>
+			</Flight>
+		</FlightList>
+		<OriginDestinationList>
+			<OriginDestination OriginDestinationKey="CDGDXB">
+				<DepartureCode>CDG</DepartureCode>
+				<ArrivalCode>DXB</ArrivalCode>
+				<FlightReferences>FL_CDGDXB_1</FlightReferences>
+			</OriginDestination>
+			<OriginDestination OriginDestinationKey="DXBFRA">
+				<DepartureCode>DXB</DepartureCode>
+				<ArrivalCode>FRA</ArrivalCode>
+				<FlightReferences>FL_DXBFRA_2</FlightReferences>
+			</OriginDestination>
+		</OriginDestinationList>
+		<PriceClassList>
+			<PriceClass PriceClassID="PC1">
+				<Name>C-BFM</Name>
+				<Code>C</Code>
+				<FareBasisCode>
+					<Code>BFM</Code>
+				</FareBasisCode>
+			</PriceClass>
+			<PriceClass PriceClassID="PC2">
+				<Name>C-BRM</Name>
+				<Code>C</Code>
+				<FareBasisCode>
+					<Code>BRM</Code>
+				</FareBasisCode>
+			</PriceClass>
+			<PriceClass PriceClassID="PC3">
+				<Name>C-BSM</Name>
+				<Code>C</Code>
+				<FareBasisCode>
+					<Code>BSM</Code>
+				</FareBasisCode>
+			</PriceClass>
+		</PriceClassList>
+		<ServiceDefinitionList>
+			<ServiceDefinition ServiceDefinitionID="SV_1017_ALL" Owner="9A">
+				<Name>Standard Meal</Name>
+				<Encoding>
+					<Code>MEL</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>This is a non-strict vegetarian meal</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1013_ALL" Owner="9A">
+				<Name>Muslim Meal</Name>
+				<Encoding>
+					<Code>MEL</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>*Halal* meal prepared according to Islamic principles</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1020_ALL" Owner="9A">
+				<Name>Lactose-free meal</Name>
+				<Encoding>
+					<Code>MEL</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>This meal is for customers who are lactose-intolerant</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1011_ALL" Owner="9A">
+				<Name>Lounge Pass</Name>
+				<Encoding>
+					<Code>GRN</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Escape the crowds and find a quiet space to work or relax</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1012_ALL" Owner="9A">
+				<Name>Vegetarian Meal</Name>
+				<Encoding>
+					<Code>MEL</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Vegetarian meal flavoured with spices from Indian sub-continent</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1018_ALL" Owner="9A">
+				<Name>Low-Carb meal</Name>
+				<Encoding>
+					<Code>MEL</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>For passengers with special dietary requirements as low-carb</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1009_ALL" Owner="9A">
+				<Name>Inflight Wi-Fi</Name>
+				<Encoding>
+					<Code>CON</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Stay connected using any Wi-Fi enabled device</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1023_ALL" Owner="9A">
+				<Name>1st Bag</Name>
+				<Encoding>
+					<Code>BAG</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Do not get caught out at the airport</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1022_ALL" Owner="9A">
+				<Name>Snack</Name>
+				<Encoding>
+					<Code>MEL</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Enjoy a wide selection of complimentary snacks and beverages</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1019_ALL" Owner="9A">
+				<Name>Diabetic Meal</Name>
+				<Encoding>
+					<Code>MEL</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Sugar is not used in the preparation of this meal</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1010_ALL" Owner="9A">
+				<Name>2nd Bag</Name>
+				<Encoding>
+					<Code>BAG</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Second bag</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1021_ALL" Owner="9A">
+				<Name>Kosher meal</Name>
+				<Encoding>
+					<Code>MEL</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Prepared by kosher caterers under rabbinical supervision</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1014_ALL" Owner="9A">
+				<Name>Advanced seat selection</Name>
+				<Encoding>
+					<Code>SET</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>A convenient option that lets you reserve your preferred seat</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+			<ServiceDefinition ServiceDefinitionID="SV_1024_ALL" Owner="9A">
+				<Name>3rd Bag</Name>
+				<Encoding>
+					<Code>BAG</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Do not get caught out at the airport</Text>
+					</Description>
+				</Descriptions>
+			</ServiceDefinition>
+		</ServiceDefinitionList>
+	</DataLists>
+	<Metadata>
+		<Other>
+			<OtherMetadata>
+				<CurrencyMetadatas>
+					<CurrencyMetadata MetadataKey="USD">
+						<Decimals>2</Decimals>
+					</CurrencyMetadata>
+				</CurrencyMetadatas>
+			</OtherMetadata>
+		</Other>
+	</Metadata>
+</AirShoppingRS>

@@ -1,0 +1,76 @@
+[
+  {
+    "id": "681aee55ba4096340900f195",
+    "name": "search-flights",
+    "description": "Search available flights as per simple search criteria.",
+    "inputSchema": "{\n  \"$schema\" : \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\" : \"object\",\n  \"properties\" : {\n    \"airShopRequest\" : {\n      \"type\" : \"object\",\n      \"description\" : \"Search Flight request\",\n      \"properties\" : {\n        \"origin\" : {\n          \"type\" : \"string\",\n          \"description\" : \"Departure airport\",\n          \"enum\" : [ \"JFK\", \"LAX\", \"DEL\", \"BOM\" ],\n          \"example\" : \"DEL\"\n        },\n        \"destination\" : {\n          \"type\" : \"string\",\n          \"description\" : \"Arrival airport\",\n          \"enum\" : [ \"JFK\", \"LAX\", \"DEL\", \"BOM\" ],\n          \"example\" : \"JFK\"\n        },\n        \"departureDate\" : {\n          \"type\" : \"string\",\n          \"format\" : \"date\",\n          \"description\" : \"Departure Date\",\n          \"example\" : \"2025-04-21\"\n        }\n      },\n      \"required\" : [ \"departureDate\", \"destination\", \"origin\" ]\n    }\n  },\n  \"required\" : [ \"airShopRequest\" ],\n  \"additionalProperties\" : false\n}",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "POST",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ],
+      "Content-Type": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/flights",
+    "queryParams": [],
+    "bodyArg": "airShopRequest"
+  },
+  {
+    "id": "681aee5bba4096340900f197",
+    "name": "book_flight",
+    "description": "Book a flight as per given flight number and passenger details",
+    "inputSchema": "{\n   \"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\n   \"type\":\"object\",\n   \"properties\":{\n      \"bookingRequest\":{\n         \"type\":\"object\",\n         \"properties\":{\n            \"flightNumber\":{\n               \"type\":\"string\",\n               \"description\":\"Flight number\"\n            },\n            \"passengers\":{\n               \"description\":\"List of Passenger details\",\n               \"type\":\"array\",\n               \"items\":{\n                  \"type\":\"object\",\n                  \"properties\":{\n                     \"firstName\":{\n                        \"type\":\"string\",\n                        \"description\":\"Passenger First name\"\n                     },\n                     \"lastName\":{\n                        \"type\":\"string\",\n                        \"description\":\"Passenger Last name\"\n                     },\n                     \"type\":{\n                        \"type\":\"string\",\n                        \"enum\":[\n                           \"ADULT\",\n                           \"CHILD\"\n                        ],\n                        \"description\":\"Passenger type, Adult or Child\"\n                     }\n                  },\n                  \"required\":[\n                     \"firstName\",\n                     \"lastName\",\n                     \"type\"\n                  ],\n                  \"description\":\"Passenger details\"\n               }\n            }\n         },\n         \"required\":[\n            \"flightNumber\",\n            \"passengers\"\n         ],\n         \"description\":\"Flight booking request\"\n      }\n   },\n   \"required\":[\n      \"bookingRequest\"\n   ],\n   \"additionalProperties\":false\n}",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "POST",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ],
+      "Content-Type": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/bookings",
+    "queryParams": [],
+    "bodyArg": "bookingRequest"
+  },
+  {
+    "id": "681aee60ba4096340900f199",
+    "name": "get_flight_booking_by_pnr",
+    "description": "Get flight booking details by PNR",
+    "inputSchema": "{\n   \"$schema\" : \"https://json-schema.org/draft/2020-12/schema\",\n   \"type\" : \"object\",\n   \"properties\" : {\n     \"pnr\" : {\n       \"type\" : \"string\"\n     }\n   },\n   \"required\" : [ \"pnr\" ],\n   \"additionalProperties\" : false\n }\n",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "GET",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/bookings/{pnr}",
+    "queryParams": [],
+    "bodyArg": null
+  },
+  {
+    "id": "681aee65ba4096340900f19b",
+    "name": "cancel_booking_by_pnr",
+    "description": "Cancel a flight booking by PNR",
+    "inputSchema": "{\n  \"$schema\" : \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\" : \"object\",\n  \"properties\" : {\n    \"pnr\" : {\n      \"type\" : \"string\"\n    }\n  },\n  \"required\" : [ \"pnr\" ],\n  \"additionalProperties\" : false\n}\n",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "PUT",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/bookings/{pnr}/cancel",
+    "queryParams": [],
+    "bodyArg": null
+  }
+]

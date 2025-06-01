@@ -1,0 +1,83 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8092",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Airline",
+      "description": "APIs."
+    }
+  ],
+  "paths": {
+    "/v1/airline/flights": {
+      "post": {
+        "tags": [
+          "Airline"
+        ],
+        "summary": "Search available flights as per simple search criteria.",
+        "operationId": "search-flights",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AirShopRequest"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AirShopRequest": {
+        "type": "object",
+        "description": "Search Flight request",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "description": "Departure airport",
+            "enum": [
+              "JFK",
+              "LAX",
+              "DEL",
+              "BOM"
+            ],
+            "example": "DEL"
+          },
+          "destination": {
+            "type": "string",
+            "description": "Arrival airport",
+            "enum": [
+              "JFK",
+              "LAX",
+              "DEL",
+              "BOM"
+            ],
+            "example": "JFK"
+          },
+          "departureDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Departure Date",
+            "example": "2025-04-21"
+          }
+        },
+        "required": [
+          "departureDate",
+          "destination",
+          "origin"
+        ]
+      }
+    }
+  }
+}

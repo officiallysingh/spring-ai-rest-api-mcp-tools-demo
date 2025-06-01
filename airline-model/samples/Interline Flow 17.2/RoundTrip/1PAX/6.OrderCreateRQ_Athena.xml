@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OrderCreateRQ EchoToken="INTERLINEnull" TimeStamp="2018-01-26T11:55:00.305+02:00" Version="IATA2017.2" xmlns="http://www.iata.org/IATA/EDIST/2017.2">
+	<Document>
+		<ReferenceVersion>1.0</ReferenceVersion>
+	</Document>
+	<Party>
+		<Sender>
+			<ORA_Sender>
+				<AirlineID>C9</AirlineID>
+			</ORA_Sender>
+		</Sender>
+		<Recipient>
+			<POA_Recipient>
+				<AirlineID>9A</AirlineID>
+			</POA_Recipient>
+		</Recipient>
+	</Party>
+	<Query>
+		<Order>
+			<Offer OfferID="OFFER1" Owner="9A" ResponseID="201-76c656caf62a4efb8fac7972c9631cc7">
+				<TotalOfferPrice>1914.38</TotalOfferPrice>
+				<OfferItem OfferItemID="OFFERITEM1_1">
+					<PassengerRefs>SH1</PassengerRefs>
+				</OfferItem>
+				<OfferItem OfferItemID="OFFERITEM6_1">
+					<PassengerRefs>SH1</PassengerRefs>
+				</OfferItem>
+			</Offer>
+		</Order>
+		<Payments>
+			<Payment>
+				<Type>CC</Type>
+				<Method>
+					<PaymentCard>
+						<CardType>CC</CardType>
+						<CardNumber>5456912312789555</CardNumber>
+						<SeriesCode>888</SeriesCode>
+						<CardHolderName>John Jones</CardHolderName>
+						<EffectiveExpireDate>
+							<Expiration>1212</Expiration>
+						</EffectiveExpireDate>
+					</PaymentCard>
+				</Method>
+				<Amount>1764.38</Amount>
+			</Payment>
+		</Payments>
+		<BookingReferences>
+			<BookingReference>
+				<ID>D16EV5</ID>
+				<AirlineID>C9</AirlineID>
+			</BookingReference>
+		</BookingReferences>
+		<DataLists>
+			<PassengerList>
+				<Passenger PassengerID="SH1">
+					<PTC>ADT</PTC>
+					<Individual IndividualID="IND_SH1">
+						<GivenName>John</GivenName>
+						<Surname>Jones</Surname>
+					</Individual>
+					<ContactInfoRef>CNTCT_SH1</ContactInfoRef>
+				</Passenger>
+			</PassengerList>
+			<ContactList>
+				<ContactInformation ContactID="CNTCT_SH1">
+					<ContactProvided>
+						<EmailAddress>
+							<EmailAddressValue>john@test.com</EmailAddressValue>
+						</EmailAddress>
+					</ContactProvided>
+				</ContactInformation>
+			</ContactList>
+		</DataLists>
+	</Query>
+</OrderCreateRQ>
