@@ -10,13 +10,12 @@ import io.swagger.v3.oas.models.media.NumberSchema;
 import io.swagger.v3.oas.models.media.ObjectSchema;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
+import java.util.Iterator;
+import java.util.Map;
+import javax.money.MonetaryAmount;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.zalando.jackson.datatype.money.MoneyModule;
-
-import javax.money.MonetaryAmount;
-import java.util.Iterator;
-import java.util.Map;
 
 @Configuration
 public class JacksonConfiguration {
@@ -25,7 +24,6 @@ public class JacksonConfiguration {
   Module moneyModule() {
     return new MoneyModule().withMoney().withDecimalNumbers();
   }
-
 
   // To fix Swagger issue
   @Bean
@@ -37,9 +35,9 @@ public class JacksonConfiguration {
 
     @Override
     public Schema<?> resolve(
-            final AnnotatedType type,
-            final ModelConverterContext context,
-            final Iterator<ModelConverter> chain) {
+        final AnnotatedType type,
+        final ModelConverterContext context,
+        final Iterator<ModelConverter> chain) {
       if (type.isSchemaProperty()) {
         final JavaType _type = Json.mapper().constructType(type.getType());
         if (_type != null) {
@@ -47,7 +45,7 @@ public class JacksonConfiguration {
           if (MonetaryAmount.class.isAssignableFrom(cls)) {
             final Schema<?> moneySchema = new ObjectSchema();
             moneySchema.setProperties(
-                    Map.of("amount", new NumberSchema(), "currency", new StringSchema()));
+                Map.of("amount", new NumberSchema(), "currency", new StringSchema()));
             return moneySchema;
           }
         }

@@ -1,8 +1,11 @@
 package ai.ksoot.rest.mcp.server;
 
 import io.mongock.runner.springboot.EnableMongock;
+import org.springframework.ai.tool.ToolCallback;
+import org.springframework.ai.tool.function.FunctionToolCallback;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableMongock
@@ -22,14 +25,14 @@ public class RestApiMCPServer {
   //    return MethodToolCallbackProvider.builder().toolObjects(airlineService).build();
   //  }
 
-  //  public record TextInput(String input) {}
-  //
-  //  @Bean
-  //  public ToolCallback toUpperCase() {
-  //    return FunctionToolCallback.builder(
-  //            "toUpperCase", (TextInput input) -> input.input().toUpperCase())
-  //        .inputType(TextInput.class)
-  //        .description("Put the text to upper case")
-  //        .build();
-  //  }
+  public record TextInput(String input) {}
+
+  @Bean
+  public ToolCallback toUpperCase() {
+    return FunctionToolCallback.builder(
+            "toUpperCase", (TextInput input) -> input.input().toUpperCase())
+        .inputType(TextInput.class)
+        .description("Put the text to upper case")
+        .build();
+  }
 }

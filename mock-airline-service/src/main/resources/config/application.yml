@@ -65,34 +65,6 @@ mongock:
   migration-scan-package:
     - com.ksoot.airline.domain.migration
 
-#------------------------- Swagger configuration -------------------------
-#springdoc:
-#  show-actuator: true
-#  group-configs:
-#    - group: actuator
-#      display-name: Actuator
-#      paths-to-match: /actuator/**
-#    - group: airline
-#      display-name: Airline
-#      paths-to-match: /**
-#      paths-to-exclude: /actuator/**
-
-#------------------------- Actuators configuration -------------------------
-# If not specified '/actuator' is taken as default. If specified must start with '/'
-#management.endpoints.web.base-path=/
-# Set it as "*", if you want to expose all actuator endpoints
-management:
-  endpoint:
-    health:
-      access: read_only
-  endpoints:
-    web:
-      exposure:
-        include: info,health,metrics
-  metrics:
-    tags:
-      application: ${spring.application.name}
-
 problem:
   type-url: http://localhost:${server.port}/problems/help.html
   debug-enabled: false
