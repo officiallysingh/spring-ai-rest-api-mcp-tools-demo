@@ -4,7 +4,7 @@
 # to allow the STDIO transport to work !!!
 spring:
   application:
-    name: voiceboat-mcp-server
+    name: rest-api-mcp-server
   main:
     banner-mode: off
   ai:
@@ -63,19 +63,19 @@ mongock:
   index-creation: true
   #    transaction-strategy: change_unit
   migration-scan-package:
-    - ai.whilter.voiceboat.mcp.server.tool.domain.InitMongoDB
+    - ai.ksoot.rest.mcp.server.tool.domain.InitMongoDB
 
 #------------------------- Swagger configuration -------------------------
-springdoc:
-  show-actuator: true
-  group-configs:
-    - group: actuator
-      display-name: Actuator
-      paths-to-match: /actuator/**
-    - group: mcp
-      display-name: MCP
-      paths-to-match: /**
-      paths-to-exclude: /actuator/**
+#springdoc:
+#  show-actuator: true
+#  group-configs:
+#    - group: actuator
+#      display-name: Actuator
+#      paths-to-match: /actuator/**
+#    - group: mcp
+#      display-name: MCP
+#      paths-to-match: /**
+#      paths-to-exclude: /actuator/**
 
 #------------------------- Actuators configuration -------------------------
 # If not specified '/actuator' is taken as default. If specified must start with '/'

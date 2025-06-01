@@ -16,7 +16,7 @@
 # to allow the STDIO transport to work !!!
 spring:
   application:
-    name: voiceboat-mcp-client
+    name: airline-chat-bot
 #  main:
 #    banner-mode: off
 #    web-application-type: none
@@ -64,21 +64,21 @@ spring:
         version: 0.0.1
         toolcallback.enabled: true
         sse.connections:
-          voiceboat-mcp-server:
+          rest-api-mcp-server:
             url: http://localhost:8080
         request-timeout: 5m
 
 #------------------------- Swagger configuration -------------------------
-springdoc:
-  show-actuator: true
-  group-configs:
-    - group: actuator
-      display-name: Actuator
-      paths-to-match: /actuator/**
-    - group: airline
-      display-name: Airline
-      paths-to-match: /**
-      paths-to-exclude: /actuator/**
+#springdoc:
+#  show-actuator: true
+#  group-configs:
+#    - group: actuator
+#      display-name: Actuator
+#      paths-to-match: /actuator/**
+#    - group: airline
+#      display-name: Airline
+#      paths-to-match: /**
+#      paths-to-exclude: /actuator/**
 
 problem:
   type-url: http://localhost:${server.port}/problems/help.html

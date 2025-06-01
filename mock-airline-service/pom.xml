@@ -39,10 +39,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
@@ -109,11 +105,11 @@
             <groupId>io.github.officiallysingh</groupId>
             <artifactId>spring-boot-problem-handler</artifactId>
         </dependency>
-        <dependency>
-            <groupId>ai.whilter</groupId>
-            <artifactId>airline-model</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>ai.whilter</groupId>-->
+<!--            <artifactId>airline-model</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

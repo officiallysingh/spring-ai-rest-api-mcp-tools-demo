@@ -63,19 +63,19 @@ mongock:
   index-creation: true
   #    transaction-strategy: change_unit
   migration-scan-package:
-    - ai.whilter.voiceboat.domain.migration
+    - com.ksoot.airline.domain.migration
 
 #------------------------- Swagger configuration -------------------------
-springdoc:
-  show-actuator: true
-  group-configs:
-    - group: actuator
-      display-name: Actuator
-      paths-to-match: /actuator/**
-    - group: airline
-      display-name: Airline
-      paths-to-match: /**
-      paths-to-exclude: /actuator/**
+#springdoc:
+#  show-actuator: true
+#  group-configs:
+#    - group: actuator
+#      display-name: Actuator
+#      paths-to-match: /actuator/**
+#    - group: airline
+#      display-name: Airline
+#      paths-to-match: /**
+#      paths-to-exclude: /actuator/**
 
 #------------------------- Actuators configuration -------------------------
 # If not specified '/actuator' is taken as default. If specified must start with '/'
