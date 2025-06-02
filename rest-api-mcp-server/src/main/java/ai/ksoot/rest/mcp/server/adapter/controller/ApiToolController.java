@@ -25,11 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -127,16 +123,5 @@ class ApiToolController implements ApiToolApi {
       throws IOException {
     final List<ApiToolCallback> apiTools = this.openApiSpecParser.parse(file.getResource());
     return ResponseEntity.ok(API_TOOLS_LIST_TRANSFORMER.apply(apiTools));
-  }
-
-  @PostMapping(
-      path = "/headers-test",
-      produces = MediaType.APPLICATION_JSON_VALUE,
-      consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<HttpHeaders> test(@RequestBody final HttpHeaders requestHeaders) {
-    HttpHeaders headers = new HttpHeaders();
-    headers.setAccept(List.of(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML));
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    return ResponseEntity.ok(headers);
   }
 }
