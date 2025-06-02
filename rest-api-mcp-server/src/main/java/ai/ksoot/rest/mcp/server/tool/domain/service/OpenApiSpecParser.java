@@ -15,13 +15,16 @@ import io.swagger.v3.parser.core.models.ParseOptions;
 import io.swagger.v3.parser.core.models.SwaggerParseResult;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.ai.util.json.JsonParser;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -53,6 +56,7 @@ public class OpenApiSpecParser {
     final String baseUrl = openAPI.getServers().getFirst().getUrl();
 
     final Paths paths = openAPI.getPaths();
+    log.debug("--------------------  Parsed API Tool Callbacks  --------------------");
     for (Map.Entry<String, PathItem> entry : paths.entrySet()) {
       final String path = entry.getKey();
       final PathItem pathItem = entry.getValue();
@@ -68,14 +72,13 @@ public class OpenApiSpecParser {
         final ApiToolCallback apiToolCallback =
             this.buildApiToolCallback(
                 baseUrl, path, httpMethod, operation, openAPI.getComponents());
+        log.debug(apiToolCallback.toString());
         apiToolCallbacks.add(apiToolCallback);
       }
     }
-
-//    System.out.println(apiToolCallbacks);
-    log.debug("--------------------  Parsed API Tool Callbacks  --------------------");
-    log.debug(apiToolCallbacks.toString());
     log.debug("---------------------------------------------------------------------");
+
+    //    System.out.println(apiToolCallbacks);
 
     return apiToolCallbacks;
   }
@@ -90,7 +93,10 @@ public class OpenApiSpecParser {
     inputSchema.put("$schema", SchemaVersion.DRAFT_2020_12.getIdentifier());
     inputSchema.put(Attributes.TYPE, Attributes.OBJECT);
     ObjectNode propertiesNode = inputSchema.putObject(Attributes.PROPERTIES);
-    List<String> requiredProperties = new ArrayList<>();
+    final List<String> requiredProperties = new ArrayList<>();
+
+    final List<MediaType> acceptableMediaTypes = this.getAcceptableMediaTypes(operation);
+    MediaType contentType = null;
 
     final String toolName =
         StringUtils.isBlank(operation.getOperationId())
@@ -127,6 +133,7 @@ public class OpenApiSpecParser {
         this.putFormat(parameter.getSchema(), parameterNode);
         this.putDescription(parameter.getSchema(), parameterNode);
         this.putEnum(parameter.getSchema(), parameterNode);
+        this.putPattern(parameter.getSchema(), parameterNode);
         this.putExample(parameter.getSchema(), parameterNode);
         final Boolean required = parameter.getRequired();
         if (required != null && required) {
@@ -137,7 +144,9 @@ public class OpenApiSpecParser {
 
     final RequestBody requestBody = operation.getRequestBody();
     if (Objects.nonNull(requestBody)) {
-      requestBodyArgName = this.buildRequestBodySchema(propertiesNode, requestBody, components);
+      contentType = this.getContentType(requestBody);
+      requestBodyArgName =
+          this.buildRequestBodySchema(propertiesNode, requestBody, contentType, components);
       final Boolean required = requestBody.getRequired();
       if (required != null && required) {
         requiredProperties.add(requestBodyArgName);
@@ -153,6 +162,12 @@ public class OpenApiSpecParser {
     final String inputSchemaString = inputSchema.toPrettyString();
     //    System.out.println("inputSchema --->> " + inputSchemaString);
 
+    final HttpHeaders defaultHeaders = new HttpHeaders();
+    defaultHeaders.setAccept(acceptableMediaTypes);
+    if (contentType != null) {
+      defaultHeaders.setContentType(contentType);
+    }
+
     ApiToolCallback apiToolCallback =
         ApiToolCallback.tool(toolName, toolDescription, inputSchemaString)
             .baseUrl(baseUrl)
@@ -160,17 +175,56 @@ public class OpenApiSpecParser {
             .httpMethod(httpMethod)
             .bodyArg(requestBodyArgName)
             .queryParams(queryParams)
+            .defaultHeaders(defaultHeaders)
             .headers(headers)
             .build();
 
     return apiToolCallback;
   }
 
+  private MediaType getContentType(final RequestBody requestBody) {
+    final Content content = requestBody.getContent();
+    Set<String> contentTypes = content.keySet();
+    if (CollectionUtils.isNotEmpty(contentTypes)) {
+      if (contentTypes.contains(APPLICATION_JSON_VALUE)) {
+        return MediaType.APPLICATION_JSON;
+      } else {
+        String contentType = contentTypes.stream().findFirst().get();
+        return MediaType.valueOf(contentType);
+      }
+    } else {
+      log.error("Request body Content Type is empty or not defined");
+      throw new IllegalArgumentException("Request body Content Type is empty or not defined");
+    }
+  }
+
+  private List<MediaType> getAcceptableMediaTypes(final Operation operation) {
+    final List<String> mediaTypes =
+        operation.getResponses().values().stream()
+            .flatMap(
+                apiResponse -> {
+                  Content content = apiResponse.getContent();
+                  if (content == null) {
+                    return Stream.empty();
+                  } else {
+                    return content.keySet().stream();
+                  }
+                })
+            .distinct()
+            .toList();
+    return CollectionUtils.isEmpty(mediaTypes)
+        ? List.of(MediaType.ALL)
+        : mediaTypes.stream().map(MediaType::valueOf).toList();
+  }
+
   private String buildRequestBodySchema(
-      final ObjectNode properties, final RequestBody requestBody, final Components components) {
+      final ObjectNode properties,
+      final RequestBody requestBody,
+      final MediaType contentType,
+      final Components components) {
 
     final Content content = requestBody.getContent();
-    final Schema<?> schema = content.get(APPLICATION_JSON_VALUE).getSchema();
+    final Schema<?> schema = content.get(contentType.toString()).getSchema();
 
     final String ref = schema.get$ref();
     if (StringUtils.isNotBlank(ref)) {
@@ -185,13 +239,14 @@ public class OpenApiSpecParser {
       if (StringUtils.isNotBlank(requestBodyDescription)) {
         properties.put(Attributes.DESCRIPTION, requestBodyDescription);
       }
-
       return requestBodyArgName;
     } else {
       // May need to throw an exception in this case
       log.warn("Request body schema is not defined");
+      final String requestBodyArgName = "request";
+      this.populateProperties(requestBodyArgName, properties, schema, components);
+      return requestBodyArgName;
     }
-    return null;
   }
 
   private void buildPropertySchema(
@@ -209,23 +264,29 @@ public class OpenApiSpecParser {
       final ObjectNode properties = objectNode.putObject(Attributes.PROPERTIES);
       this.buildPropertySchema(objectArgName, properties, objectSchema, components);
     } else {
-      final ObjectNode propNode = objectNode.putObject(propertyName);
-      this.putType(schema, propNode, components);
-      this.putFormat(schema, propNode);
-      this.putDescription(schema, propNode);
-      this.putEnum(schema, propNode);
-      this.putExample(schema, propNode);
-
-      final Map<String, Schema> subProperties = schema.getProperties();
-      if (MapUtils.isNotEmpty(subProperties)) {
-        final ObjectNode propertiesNode = propNode.putObject(Attributes.PROPERTIES);
-        for (Map.Entry<String, Schema> entry : subProperties.entrySet()) {
-          buildPropertySchema(entry.getKey(), propertiesNode, entry.getValue(), components);
-        }
-      }
-
-      this.putRequiredProperties(schema, propNode);
+      this.populateProperties(propertyName, objectNode, schema, components);
     }
+  }
+
+  private void populateProperties(
+      String propertyName, ObjectNode objectNode, Schema<?> schema, Components components) {
+    final ObjectNode propNode = objectNode.putObject(propertyName);
+    this.putType(schema, propNode, components);
+    this.putFormat(schema, propNode);
+    this.putDescription(schema, propNode);
+    this.putEnum(schema, propNode);
+    this.putPattern(schema, propNode);
+    this.putExample(schema, propNode);
+
+    final Map<String, Schema> subProperties = schema.getProperties();
+    if (MapUtils.isNotEmpty(subProperties)) {
+      final ObjectNode propertiesNode = propNode.putObject(Attributes.PROPERTIES);
+      for (Map.Entry<String, Schema> entry : subProperties.entrySet()) {
+        buildPropertySchema(entry.getKey(), propertiesNode, entry.getValue(), components);
+      }
+    }
+
+    this.putRequiredProperties(schema, propNode);
   }
 
   private void putDescription(final Schema<?> schema, final ObjectNode objectNode) {
@@ -255,8 +316,8 @@ public class OpenApiSpecParser {
         } else if (StringUtils.isNotBlank(schema.getItems().get$ref())) {
           String ref = schema.getItems().get$ref();
           String itemClassName = ref.substring(ref.lastIndexOf('/') + 1);
-//          String itemArgName =
-//              itemClassName.substring(0, 1).toLowerCase() + itemClassName.substring(1);
+          //          String itemArgName =
+          //              itemClassName.substring(0, 1).toLowerCase() + itemClassName.substring(1);
           final Schema<?> itemSchema = components.getSchemas().get(itemClassName);
           //          itemsNode.put(Attributes.TYPE, Attributes.OBJECT);
           //          final ObjectNode properties = objectNode.putObject(Attributes.PROPERTIES);
@@ -282,6 +343,13 @@ public class OpenApiSpecParser {
     Object example = schema.getExample();
     if (Objects.nonNull(example)) {
       objectNode.putPOJO(Attributes.EXAMPLE, example);
+    }
+  }
+
+  private void putPattern(final Schema<?> schema, final ObjectNode objectNode) {
+    String pattern = schema.getPattern();
+    if (StringUtils.isNotBlank(pattern)) {
+      objectNode.put(Attributes.PATTERN, pattern);
     }
   }
 
@@ -316,6 +384,7 @@ public class OpenApiSpecParser {
     public static final String FORMAT = "format";
     public static final String REQUIRED = "required";
     public static final String EXAMPLE = "example";
+    public static final String PATTERN = "pattern";
     public static final String ENUM = "enum";
     public static final String ITEMS = "items";
     public static final String PROPERTIES = "properties";

@@ -50,6 +50,7 @@ public class ApiToolService {
                         .httpMethod(request.getHttpMethod())
                         .bodyArg(request.getBodyArg())
                         .queryParams(request.getQueryParams())
+                        .defaultHeaders(request.getDefaultHeaders())
                         .build())
             .toList();
 

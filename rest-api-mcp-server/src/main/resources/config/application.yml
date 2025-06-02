@@ -57,6 +57,14 @@ spring:
     virtual:
       enabled: true
 
+# ------------- Logging configuration --------------
+logbook:
+  filter:
+    enabled: true
+  format:
+    style: http
+  predicate.exclude[0].path: /actuator/**
+
 mongock:
   enabled: true
   default-author: system
@@ -87,6 +95,8 @@ logging:
     '[org.springframework.ai]': debug
     '[org.mongodb.driver]': warn
     '[org.springframework.data.mongodb.core.MongoTemplate]': debug
+#    Uncomment following line to enable HTTP Request/Response logging
+#    '[org.zalando.logbook]': TRACE
 debug: false
 
 
