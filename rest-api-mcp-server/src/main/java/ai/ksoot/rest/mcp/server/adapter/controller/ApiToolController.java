@@ -1,5 +1,6 @@
 package ai.ksoot.rest.mcp.server.adapter.controller;
 
+import static ai.ksoot.rest.mcp.server.common.CommonErrorKeys.EMPTY_UPDATE_REQUEST;
 import static ai.ksoot.rest.mcp.server.tool.domain.ApiToolMappers.API_TOOLS_LIST_TRANSFORMER;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -9,12 +10,10 @@ import ai.ksoot.rest.mcp.server.common.util.pagination.PaginatedResource;
 import ai.ksoot.rest.mcp.server.common.util.pagination.PaginatedResourceAssembler;
 import ai.ksoot.rest.mcp.server.common.util.rest.response.APIResponse;
 import ai.ksoot.rest.mcp.server.tool.domain.ApiToolMappers;
-import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolCallback;
-import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolCallbackProvider;
-import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolRequest;
-import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolResponse;
+import ai.ksoot.rest.mcp.server.tool.domain.model.*;
 import ai.ksoot.rest.mcp.server.tool.domain.service.ApiToolService;
 import ai.ksoot.rest.mcp.server.tool.domain.service.OpenApiSpecParser;
+import com.ksoot.problem.core.Problems;
 import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
 import java.io.IOException;
@@ -25,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -90,6 +90,21 @@ class ApiToolController implements ApiToolApi {
   public ResponseEntity<List<ApiToolResponse>> getAllApiTools() {
     final List<ApiToolCallback> apiTools = this.apiToolService.getAllApiTools();
     return ResponseEntity.ok(API_TOOLS_LIST_TRANSFORMER.apply(apiTools));
+  }
+
+  @Override
+  public ResponseEntity<APIResponse<?>> updateApiTool(
+      final String id, final ApiToolUpdateRequest request) {
+    if (request.isEmpty()) {
+      throw Problems.newInstance(EMPTY_UPDATE_REQUEST).throwAble(HttpStatus.BAD_REQUEST);
+    }
+    final ApiToolCallback apiToolCallback = this.apiToolService.updateApiTool(id, request);
+    return ResponseEntity.ok()
+        .location(
+            linkTo(methodOn(ApiToolController.class).getApiToolById(apiToolCallback.getId()))
+                .withSelfRel()
+                .toUri())
+        .body(APIResponse.newInstance().addSuccess(GeneralMessageResolver.RECORD_UPDATED));
   }
 
   @Override

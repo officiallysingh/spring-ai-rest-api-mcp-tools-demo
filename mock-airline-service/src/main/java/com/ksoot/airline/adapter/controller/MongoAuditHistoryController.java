@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +22,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-// @RestController
-// @RequestMapping("/v1/audit-history")
-// @Tag(name = "Mongo Audit History", description = "query APIs")
+@RestController
+@RequestMapping("/v1/audit-history")
+@Tag(name = "Audit History", description = "query APIs")
 @RequiredArgsConstructor
 class MongoAuditHistoryController {
 
@@ -46,8 +49,9 @@ class MongoAuditHistoryController {
       })
   public PaginatedResource<AuditEvent> getAuditHistory(
       @Parameter(
-              description = "Source MongoDB Collection name. E.g. <b>cities</b> or <b>states</b>",
-              required = true)
+              description = "Source MongoDB Collection name. E.g. <b>bookings</b>",
+              required = true,
+              example = "bookings")
           @RequestParam
           final String collectionName,
       @Parameter(description = "Audit Event type.") @RequestParam(required = false)

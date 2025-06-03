@@ -9,6 +9,7 @@ import ai.ksoot.rest.mcp.server.common.util.rest.Api;
 import ai.ksoot.rest.mcp.server.common.util.rest.response.APIResponse;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolRequest;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolResponse;
+import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -125,30 +126,29 @@ public interface ApiToolApi extends Api {
   @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<List<ApiToolResponse>> getAllApiTools();
 
-  //  @Operation(operationId = "update-api-tool", summary = "Updates an API Tool")
-  //  @ApiResponses(
-  //      value = {
-  //        @ApiResponse(responseCode = "200", description = "API Tool updated successfully"),
-  //        @ApiResponse(
-  //            responseCode = SC_400,
-  //            description = "Bad request",
-  //            content = @Content(examples = @ExampleObject(BAD_REQUEST_EXAMPLE_RESPONSE))),
-  //        @ApiResponse(
-  //            responseCode = "404",
-  //            description = "Requested API Tool not found",
-  //            content = @Content(examples = @ExampleObject(NOT_FOUND_EXAMPLE_RESPONSE)))
-  //      })
-  //  @PatchMapping(
-  //      path = "/{id}",
-  //      consumes = MediaType.APPLICATION_JSON_VALUE,
-  //      produces = MediaType.APPLICATION_JSON_VALUE)
-  //  ResponseEntity<APIResponse<?>> updateApiTool(
-  //      @Parameter(description = "API Tool Id", required = true, example =
-  // "68106d632e1b8a3710692a85")
-  //          @PathVariable(name = "id")
-  //          final String id,
-  //      @Parameter(description = "Update API tool request", required = true) @RequestBody @Valid
-  //          final ApiToolUpdationRQ request);
+  @Operation(operationId = "update-api-tool", summary = "Updates an API Tool")
+  @ApiResponses(
+      value = {
+        @ApiResponse(responseCode = "200", description = "API Tool updated successfully"),
+        @ApiResponse(
+            responseCode = SC_400,
+            description = "Bad request",
+            content = @Content(examples = @ExampleObject(BAD_REQUEST_EXAMPLE_RESPONSE))),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Requested API Tool not found",
+            content = @Content(examples = @ExampleObject(NOT_FOUND_EXAMPLE_RESPONSE)))
+      })
+  @PatchMapping(
+      path = "/{id}",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  ResponseEntity<APIResponse<?>> updateApiTool(
+      @Parameter(description = "API Tool Id", required = true, example = "68106d632e1b8a3710692a85")
+          @PathVariable(name = "id")
+          final String id,
+      @Parameter(description = "Update API tool request", required = true) @RequestBody @Valid
+          final ApiToolUpdateRequest request);
 
   @Operation(operationId = "delete-tool-by-id", summary = "Deletes a Tool by id")
   @ApiResponses(

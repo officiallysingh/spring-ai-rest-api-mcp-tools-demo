@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1/audit-history")
-@Tag(name = "Mongo Audit History", description = "query APIs")
+@Tag(name = "Audit History", description = "query APIs")
 @RequiredArgsConstructor
 class MongoAuditHistoryController {
 
@@ -49,8 +49,10 @@ class MongoAuditHistoryController {
       })
   public PaginatedResource<AuditEvent> getAuditHistory(
       @Parameter(
-              description = "Source MongoDB Collection name. E.g. <b>cities</b> or <b>states</b>",
-              required = true)
+              description =
+                  "Source MongoDB Collection name. E.g. <b>api_tools</b> or <b>states</b>",
+              required = true,
+              example = "api_tools")
           @RequestParam
           final String collectionName,
       @Parameter(description = "Audit Event type.") @RequestParam(required = false)

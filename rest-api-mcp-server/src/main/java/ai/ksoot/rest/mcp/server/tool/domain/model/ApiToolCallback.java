@@ -5,6 +5,7 @@ import static ai.ksoot.rest.mcp.server.common.mongo.MongoSchema.COLLECTION_TOOLS
 import ai.ksoot.rest.mcp.server.common.mongo.AbstractEntity;
 import ai.ksoot.rest.mcp.server.common.mongo.Auditable;
 import com.fasterxml.jackson.core.type.TypeReference;
+import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.*;
 import java.util.function.Function;
@@ -17,7 +18,6 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.ai.chat.model.ToolContext;
 import org.springframework.ai.tool.ToolCallback;
-import org.springframework.ai.tool.definition.DefaultToolDefinition;
 import org.springframework.ai.tool.execution.DefaultToolCallResultConverter;
 import org.springframework.ai.tool.execution.ToolCallResultConverter;
 import org.springframework.ai.tool.metadata.DefaultToolMetadata;
@@ -39,6 +39,7 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriBuilder;
 
 @Getter
+@Setter
 @Auditable
 @Document(collection = COLLECTION_TOOLS)
 @TypeAlias("api_tool")
@@ -58,21 +59,27 @@ public class ApiToolCallback extends AbstractEntity implements ToolCallback {
       (DefaultToolMetadata) DefaultToolMetadata.builder().build();
   private static final Pattern PATH_VARIABLE_PATTERN = Pattern.compile("\\{([^/}]+)}");
 
+  @NotNull
   @Field(name = "tool_definition")
-  private DefaultToolDefinition toolDefinition;
+  private ApiToolDefinition toolDefinition;
 
+  @NotNull
   @Field(name = "return_direct")
   private DefaultToolMetadata toolMetadata;
 
+  @NotNull
   @Field(name = "http_method")
   private HttpMethod httpMethod;
 
+  @NotNull
   @Field(name = "default_headers")
   private HttpHeaders defaultHeaders;
 
+  @NotNull
   @Field(name = "base_url")
   private String baseUrl;
 
+  @NotNull
   @Field(name = "path")
   private String path;
 
@@ -95,7 +102,7 @@ public class ApiToolCallback extends AbstractEntity implements ToolCallback {
 
   @PersistenceCreator
   protected ApiToolCallback(
-      final DefaultToolDefinition toolDefinition,
+      final ApiToolDefinition toolDefinition,
       @Nullable final DefaultToolMetadata toolMetadata,
       //      @Nullable final ToolCallResultConverter toolCallResultConverter,
       final String baseUrl,
@@ -145,8 +152,46 @@ public class ApiToolCallback extends AbstractEntity implements ToolCallback {
   }
 
   @Override
-  public DefaultToolDefinition getToolDefinition() {
+  public ApiToolDefinition getToolDefinition() {
     return this.toolDefinition;
+  }
+
+  public void setName(final String name) {
+    this.toolDefinition.name(name);
+  }
+
+  public String getName() {
+    return this.toolDefinition.name();
+  }
+
+  public void setDescription(final String description) {
+    this.toolDefinition.description(description);
+  }
+
+  public String getDescription() {
+    return this.toolDefinition.description();
+  }
+
+  public void setInputSchema(final String inputSchema) {
+    this.toolDefinition.inputSchema(inputSchema);
+  }
+
+  public String getInputSchema() {
+    return this.toolDefinition.inputSchema();
+  }
+
+  public void setReturnDirect(final boolean returnDirect) {
+    this.toolMetadata =
+        (DefaultToolMetadata) ToolMetadata.builder().returnDirect(returnDirect).build();
+  }
+
+  public boolean getReturnDirect() {
+    return this.toolMetadata.returnDirect();
+  }
+
+  public void setPath(final String path) {
+    this.path = path;
+    this.pathVariables = extractPathVariables(path);
   }
 
   @Override
@@ -283,22 +328,18 @@ public class ApiToolCallback extends AbstractEntity implements ToolCallback {
 
   public static BaseUrlBuilder tool(
       final String name, final String description, final String inputSchema) {
+    ;
     return new ApiToolCallbackArgBuilder(
-        (DefaultToolDefinition)
-            DefaultToolDefinition.builder()
-                .name(name)
-                .description(description)
-                .inputSchema(inputSchema)
-                .build(),
+        ApiToolDefinition.named(name).description(description).inputSchema(inputSchema).build(),
         false);
   }
 
-  public static BaseUrlBuilder of(final DefaultToolDefinition toolDefinition) {
+  public static BaseUrlBuilder of(final ApiToolDefinition toolDefinition) {
     return new ApiToolCallbackArgBuilder(toolDefinition, false);
   }
 
   public static BaseUrlBuilder of(
-      final DefaultToolDefinition toolDefinition, final boolean returnDirect) {
+      final ApiToolDefinition toolDefinition, final boolean returnDirect) {
     return new ApiToolCallbackArgBuilder(toolDefinition, returnDirect);
   }
 
@@ -356,7 +397,7 @@ public class ApiToolCallback extends AbstractEntity implements ToolCallback {
   public static class ApiToolCallbackArgBuilder
       implements BaseUrlBuilder, PathBuilder, HttpMethodBuilder, BodyArgBuilder {
 
-    private final DefaultToolDefinition toolDefinition;
+    private final ApiToolDefinition toolDefinition;
     private final DefaultToolMetadata toolMetadata;
 
     private String baseUrl;
@@ -369,7 +410,7 @@ public class ApiToolCallback extends AbstractEntity implements ToolCallback {
     private String bodyArg;
 
     public ApiToolCallbackArgBuilder(
-        final DefaultToolDefinition toolDefinition, final boolean returnDirect) {
+        final ApiToolDefinition toolDefinition, final boolean returnDirect) {
       this.toolDefinition = toolDefinition;
       this.toolMetadata =
           (DefaultToolMetadata) ToolMetadata.builder().returnDirect(returnDirect).build();

@@ -2,9 +2,12 @@ package ai.ksoot.rest.mcp.server.tool.domain.service;
 
 import ai.ksoot.rest.mcp.server.adapter.repository.ApiToolCallbackRepository;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolCallback;
+import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolDefinition;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolRequest;
+import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolUpdateRequest;
 import com.ksoot.problem.core.Problems;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,6 +58,28 @@ public class ApiToolService {
             .toList();
 
     return this.apiToolCallbackRepository.saveAll(apiTools);
+  }
+
+  @Transactional
+  public ApiToolCallback updateApiTool(final String id, final ApiToolUpdateRequest request) {
+
+    final ApiToolCallback apiToolCallback = this.getApiToolById(id);
+    ApiToolDefinition toolDefinition = apiToolCallback.getToolDefinition();
+    toolDefinition.name();
+
+    Optional.ofNullable(request.getName()).ifPresent(apiToolCallback::setName);
+    Optional.ofNullable(request.getDescription()).ifPresent(apiToolCallback::setDescription);
+    Optional.ofNullable(request.getInputSchema()).ifPresent(apiToolCallback::setInputSchema);
+    Optional.ofNullable(request.getReturnDirect()).ifPresent(apiToolCallback::setReturnDirect);
+    Optional.ofNullable(request.getHttpMethod()).ifPresent(apiToolCallback::setHttpMethod);
+    Optional.ofNullable(request.getDefaultHeaders()).ifPresent(apiToolCallback::setDefaultHeaders);
+    Optional.ofNullable(request.getBaseUrl()).ifPresent(apiToolCallback::setBaseUrl);
+    Optional.ofNullable(request.getPath()).ifPresent(apiToolCallback::setPath);
+    Optional.ofNullable(request.getQueryParams()).ifPresent(apiToolCallback::setQueryParams);
+    Optional.ofNullable(request.getHeaders()).ifPresent(apiToolCallback::setHeaders);
+    Optional.ofNullable(request.getBodyArg()).ifPresent(apiToolCallback::setBodyArg);
+
+    return this.apiToolCallbackRepository.save(apiToolCallback);
   }
 
   @Transactional(readOnly = true)
