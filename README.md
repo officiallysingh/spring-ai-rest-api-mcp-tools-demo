@@ -154,7 +154,7 @@ A tool is defined by the following properties:
 * [**ToolDefinition**](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/support/ToolDefinitions.html) ⭑ : Definition used by the AI model to determine when and how to call the tool.
   * **Name** ⭑ : The tool name. Unique within the tool set provided to a model.
   * **Description** ⭑ : The tool description, used by the AI model to determine what the tool does.
-  * **Input Schema** ⭑ : The schema of the parameters used to call the tool.
+  * **Input Schema** ⭑ : The [json schema](https://json-schema.org/learn) of the parameters used to call the tool.
 * [ToolMetadata](https://docs.spring.io/spring-ai/reference/api/aimetadata.html): Metadata about a tool specification and execution.
   Currently, [DefaultToolMetadata](https://docs.spring.io/spring-ai/docs/1.0.0/api/org/springframework/ai/tool/metadata/DefaultToolMetadata.html) is used to define the metadata of a tool, but can be changed as per requirements.
     * **Return Direct**: Whether the tool result should be returned directly or passed back to the model.
@@ -359,6 +359,9 @@ curl -X 'POST' \
 Upload OpenAPI spec file [airline.json](rest-api-mcp-server/src/main/resources/oas/airline.json) for Mock Airline REST server.  
 You will get a response [airline-api-tools.json](rest-api-mcp-server/src/main/resources/oas/ailine-api-tools.json) with all the API tools derived from the APIs defined in the OpenAPI spec.  
 You can download the response `json` from Swagger response of this API call.
+
+> [!IMPORTANT]
+> The most complex part is creating input schema for the API tool, which is automatically generated from the OpenAPI spec.
 
 #### Create API Tools from OpenAPI Spec
 Copy the response from the above API call and pass it in body of following API to create all the API tools at once.
@@ -679,5 +682,6 @@ Please give me a :star: and a :clap: on [**medium.com**](https://officiallysingh
 - [Model Context Protocol](https://modelcontextprotocol.io/introduction)
 - [Model Context Protocol Specification](https://github.com/modelcontextprotocol/modelcontextprotocol)
 - [Spring Boot Auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.developing-auto-configuration)
+- [JSON Schema guide](https://json-schema.org/learn)
 - [A Visual guide to LLM agents](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-llm-agents) by [Maarten Grootendorst](https://substack.com/@maartengrootendorst)
 - [A visual guide to reasoning LLMs](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-reasoning-llms) by [Maarten Grootendorst](https://substack.com/@maartengrootendorst)
