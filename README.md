@@ -1,4 +1,6 @@
 # Turning REST APIs to AI-Callable MCP Tools
+### Building an MCP Server with Spring Boot and Spring AI
+
 [![Java](https://img.shields.io/badge/java-21-blue.svg)](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 [![Java](https://img.shields.io/badge/spring_boot-3.4.4-blue.svg)](https://spring.io/projects/spring-boot)
 [![Maven](https://img.shields.io/badge/maven-3.9.5-blue.svg)](https://maven.apache.org/)
@@ -7,8 +9,6 @@
 
 
 ![MCP Overview](https://github.com/officiallysingh/spring-ai-rest-api-mcp-tools-demo/blob/main/img/MCP_Overview.png)
-
-### Building an MCP Server with Spring Boot and Spring AI
 
 ## Prerequisites
 This project requires:
