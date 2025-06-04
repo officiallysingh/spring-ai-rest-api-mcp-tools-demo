@@ -472,7 +472,7 @@ Run [**AirlineChatClientApplication**](airline-chat-bot/src/main/java/ai/ksoot/m
 > So create the APT tools in MCP server before starting the chat client.
 
 ### Configurations
-Make sure `rest-api-mcp-server` MCP server is configured with its `url` below and `toolcallback.enabled` is set to `true`. 
+Make sure `rest-api-mcp-server` MCP server is configured with its `url` and `toolcallback.enabled` is set to `true` as given below. 
 ```yaml
 spring:
   ai:
