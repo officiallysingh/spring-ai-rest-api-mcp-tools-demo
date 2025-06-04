@@ -2,7 +2,6 @@ package ai.ksoot.rest.mcp.server.tool.domain.service;
 
 import ai.ksoot.rest.mcp.server.adapter.repository.ApiToolCallbackRepository;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolCallback;
-import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolDefinition;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolRequest;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolUpdateRequest;
 import com.ksoot.problem.core.Problems;

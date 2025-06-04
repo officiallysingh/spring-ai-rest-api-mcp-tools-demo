@@ -109,18 +109,17 @@ class ApiToolController implements ApiToolApi {
 
   @Override
   public ResponseEntity<APIResponse<?>> updateApiToolByName(
-          final String name,
-          final ApiToolUpdateRequest request) {
+      final String name, final ApiToolUpdateRequest request) {
     if (request.isEmpty()) {
       throw Problems.newInstance(EMPTY_UPDATE_REQUEST).throwAble(HttpStatus.BAD_REQUEST);
     }
     final ApiToolCallback apiToolCallback = this.apiToolService.updateApiToolByName(name, request);
     return ResponseEntity.ok()
-            .location(
-                    linkTo(methodOn(ApiToolController.class).getApiToolById(apiToolCallback.getId()))
-                            .withSelfRel()
-                            .toUri())
-            .body(APIResponse.newInstance().addSuccess(GeneralMessageResolver.RECORD_UPDATED));
+        .location(
+            linkTo(methodOn(ApiToolController.class).getApiToolById(apiToolCallback.getId()))
+                .withSelfRel()
+                .toUri())
+        .body(APIResponse.newInstance().addSuccess(GeneralMessageResolver.RECORD_UPDATED));
   }
 
   @Override
