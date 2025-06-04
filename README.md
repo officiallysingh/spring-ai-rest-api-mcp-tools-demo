@@ -544,7 +544,7 @@ curl -X 'POST' \
 Make the chat API call with the below prompts in sequence as given in **_User_** section.  
 Or use Postman Collection [airline-chat-bot.postman_collection.json](Mock%20Airline%20Chat%20assitant.postman_collection.json) and make API calls in sequence.
 > [!NOTE]
-> Change departure date to tomorrow's date in search flight request and change PNR in requests to your booking PNR.
+> Change departure date to tomorrow's date in search flight request and replace PNR with your booking PNR in whichever requests applicable.
 ---------------------------------------------------------------------------------------
 **_User_**: Hi  
 **_Assistant_**: Hello! How can I assist you today? Are you looking to search for flights or retrieve booking information?   
