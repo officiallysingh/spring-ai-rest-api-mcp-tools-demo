@@ -147,8 +147,8 @@ Each tool is an object of class [**ApiToolCallback**](rest-api-mcp-server/src/ma
 A tool is defined by the following properties:
 * [**ToolDefinition**](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/support/ToolDefinitions.html) ⭑ : Definition used by the AI model to determine when and how to call the tool.
   * **Name** ⭑ : The tool name. Unique within the tool set provided to a model.
-  * **Description ⭑ : The tool description, used by the AI model to determine what the tool does.
-  * **Input Schema ⭑ : The schema of the parameters used to call the tool.
+  * **Description** ⭑ : The tool description, used by the AI model to determine what the tool does.
+  * **Input Schema** ⭑ : The schema of the parameters used to call the tool.
 * [ToolMetadata](https://docs.spring.io/spring-ai/reference/api/aimetadata.html): Metadata about a tool specification and execution.
   Currently, [DefaultToolMetadata](https://docs.spring.io/spring-ai/docs/1.0.0/api/org/springframework/ai/tool/metadata/DefaultToolMetadata.html) is used to define the metadata of a tool, but can be changed as per requirements.
     * **Return Direct**: Whether the tool result should be returned directly or passed back to the model.
@@ -163,7 +163,7 @@ A tool is defined by the following properties:
 * **Path Variables**: The names of path variables to be set while making the API call. Not required by create Api Tool API, but automatically extracted from give `path`.
 * **Query Parameters**: The names of query parameters to be passed while making the API call.
 * **Headers**: The runtime headers to be set while making the API call.
-* **Body Argument name**: The name of the body argument to be passed while making the API call.
+* **Body Argument name**: The name of the body argument to be passed while making the API call. Cannot be used with `GET` method.
 
 > [!NOTE]
 > The parameters marked with ⭑ are mandatory to define a tool. 
