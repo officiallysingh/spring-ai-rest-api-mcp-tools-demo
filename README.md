@@ -146,7 +146,7 @@ Spring boot project [**rest-api-mcp-server**](rest-api-mcp-server) **implements 
 Each tool is an object of class [**ApiToolCallback**](rest-api-mcp-server/src/main/java/ai/ksoot/rest/mcp/server/tool/domain/model/ApiToolCallback.java) and abstract the tool definition along with parameters and logic to execute the remote API call. 
 A tool is defined by the following properties:
 * [**ToolDefinition**](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/support/ToolDefinitions.html): Definition used by the AI model to determine when and how to call the tool.
-  * **Name** $\color{red}{*}$: The tool name. Unique within the tool set provided to a model.
+  * **Name** <span style="color:#ff0000">*</span> : The tool name. Unique within the tool set provided to a model.
   * **Description** <span style="color:red">*</span>: The tool description, used by the AI model to determine what the tool does.
   * **Input Schema** <span style="color:red">*</span>: The schema of the parameters used to call the tool.
 * [ToolMetadata](https://docs.spring.io/spring-ai/reference/api/aimetadata.html): Metadata about a tool specification and execution.
