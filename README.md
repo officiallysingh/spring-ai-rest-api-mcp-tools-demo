@@ -46,7 +46,7 @@ This service's REST APIs are registered as MCP tools, allowing AI applications t
 ### Running the Mock Airline Service
 Run [**MockAirlineApplication**](mock-airline-service/src/main/java/com/ksoot/airline/MockAirlineApplication.java) as Spring boot application.
 * Make sure MongoDB is running on `localhost:27017` or update the [application.yml](mock-airline-service/src/main/resources/config/application.yml) file with your MongoDB connection details.
-* Application is bundled with [Docker Compose Support](https://www.baeldung.com/docker-compose-support-spring-boot), so if you don't have MongoDB running on your machine then you can run it in Docker by running the application in `docker` profile by setting VM option `-Dspring.profiles.active=docker`.
+* Application is bundled with [Docker Compose Support](https://www.baeldung.com/docker-compose-support-spring-boot), so if you don't have MongoDB running on your machine, then you can run it in Docker by running the application in `docker` profile by setting VM option `-Dspring.profiles.active=docker`.
 * Access Swagger UI at [http://localhost:8092/swagger-ui/index.html](http://localhost:8092/swagger-ui/index.html) to explore the available REST APIs.
 
 ### Following are the available Mock Airline APIs
@@ -179,7 +179,7 @@ A tool is defined by the following properties:
 ### Running MCP Server
 Run [**RestApiMCPServer**](rest-api-mcp-server/src/main/java/ai/ksoot/rest/mcp/server/RestApiMCPServer.java) as Spring boot application.
 * Make sure MongoDB is running on `localhost:27017` or update the [application.yml](mock-airline-service/src/main/resources/config/application.yml) file with your MongoDB connection details.
-* Application is bundled with [Docker Compose Support](https://www.baeldung.com/docker-compose-support-spring-boot), so if you don't have MongoDB running on your machine then you can run it in Docker by running the application in `docker` profile by setting VM option `-Dspring.profiles.active=docker`.
+* Application is bundled with [Docker Compose Support](https://www.baeldung.com/docker-compose-support-spring-boot), so if you don't have MongoDB running on your machine, then you can run it in Docker by running the application in `docker` profile by setting VM option `-Dspring.profiles.active=docker`.
 * Access Swagger UI at [http://localhost:8090/swagger-ui/index.html](http://localhost:8090/swagger-ui/index.html) to explore the available REST APIs.
 
 ![MCP Server Swagger](https://github.com/officiallysingh/spring-ai-rest-api-mcp-tools-demo/blob/main/img/Swagger_MCP_Server.png)
@@ -459,6 +459,10 @@ Run [**AirlineChatClientApplication**](airline-chat-bot/src/main/java/ai/ksoot/m
 * Pass the `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` as VM option to use OpenAI or Anthropic AI model respectively. e.g. `-DOPENAI_API_KEY=your_openai_api_key` or `-DANTHROPIC_API_KEY=your_anthropic_api_key`
 * Access Swagger UI at [http://localhost:8091/swagger-ui/index.html](http://localhost:8091/swagger-ui/index.html) to explore the available REST API to chat with the client.
 * The logs for application do not show up in the console, so you can check the logs in [airline-chat-bot.log](logs/airline-chat-bot.log) file.
+
+> [!CAUTION]
+> This Chat client demo does not pick the real-time MCP tool changes from the MCP server. 
+> So create the MCP tools before starting the chat client.
 
 ### Configurations
 `rest-api-mcp-server` MCP server is configured with its `url` below. 

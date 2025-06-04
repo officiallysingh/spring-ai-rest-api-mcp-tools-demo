@@ -24,25 +24,4 @@ public class AirlineChatClientApplication {
   public static void main(String[] args) {
     SpringApplication.run(AirlineChatClientApplication.class, args);
   }
-
-  //  private final String userInput = "What tools are available?";
-  //
-  //  @Bean
-  //  public CommandLineRunner predefinedQuestions(
-  //      ChatClient.Builder chatClientBuilder,
-  //      ToolCallbackProvider tools,
-  //      ConfigurableApplicationContext context) {
-  //
-  //    return args -> {
-  //      var chatClient =
-  //          chatClientBuilder
-  //              //              .defaultTools(tools)
-  //              .build();
-  //
-  //      System.out.println("\n>>> QUESTION: " + userInput);
-  //      System.out.println("\n>>> ASSISTANT: " + chatClient.prompt(userInput).call().content());
-  //
-  //      context.close();
-  //    };
-  //  }
 }
