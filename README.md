@@ -145,10 +145,10 @@ curl -X 'PUT' \
 Spring boot project [**rest-api-mcp-server**](rest-api-mcp-server) **implements the core idea to convert REST API operations into MCP Tools** using [Spring AI](https://spring.io/projects/spring-ai) [MCP support](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-overview.html).
 Each tool is an object of class [**ApiToolCallback**](rest-api-mcp-server/src/main/java/ai/ksoot/rest/mcp/server/tool/domain/model/ApiToolCallback.java) and abstract the tool definition along with parameters and logic to execute the remote API call. 
 A tool is defined by the following properties:
-* [**ToolDefinition**](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/support/ToolDefinitions.html): Definition used by the AI model to determine when and how to call the tool.
-  * **Name** **<span style="color:#ff0000">*</span>** : The tool name. Unique within the tool set provided to a model.
-  * **Description** <span style="color:red">*</span>: The tool description, used by the AI model to determine what the tool does.
-  * **Input Schema** <span style="color:red">*</span>: The schema of the parameters used to call the tool.
+* [**ToolDefinition**](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/support/ToolDefinitions.html) 🔴: Definition used by the AI model to determine when and how to call the tool.
+  * **Name** 🔴: The tool name. Unique within the tool set provided to a model.
+  * **Description 🔴: The tool description, used by the AI model to determine what the tool does.
+  * **Input Schema 🔴: The schema of the parameters used to call the tool.
 * [ToolMetadata](https://docs.spring.io/spring-ai/reference/api/aimetadata.html): Metadata about a tool specification and execution.
   Currently, [DefaultToolMetadata](https://docs.spring.io/spring-ai/docs/1.0.0/api/org/springframework/ai/tool/metadata/DefaultToolMetadata.html) is used to define the metadata of a tool, but can be changed as per requirements.
     * **Return Direct**: Whether the tool result should be returned directly or passed back to the model.
@@ -156,17 +156,17 @@ A tool is defined by the following properties:
 > The AI model uses The tool definition and metadata while deciding when and how to use the respective tool, so these attributes must be provided with values that can assist the AI Agents.
 * [**ToolCallResultConverter**](https://docs.spring.io/spring-ai/docs/1.0.x/api/org/springframework/ai/tool/execution/ToolCallResultConverter.html): Given an Object returned by a tool, convert it to a String compatible with the given class type.
   Currently, The default converter is [**DefaultToolCallResultConverter**](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/converter/DefaultToolCallResultConverter.html) being used, but can be changed as per requirements.
-* **Http Method** <span style="color:red">*</span>: The HTTP method of Target REST API, such as `GET`, `POST`, `PUT`, etc.
-* **Default Headers* <span style="color:red">*</span>: The static header values set while making the API call, such as `Content-Type: application/json`, `Accept: */*`, etc.
-* **Base Url** <span style="color:red">*</span>: The Base URL of the Target REST API, such as `http://localhost:8092/v1/airline`.
-* **Path** <span style="color:red">*</span>: The path of the Target REST API. e.g. `/bookings/{pnr}`.
+* **Http Method** 🔴: The HTTP method of Target REST API, such as `GET`, `POST`, `PUT`, etc.
+* **Default Headers** 🔴: The static header values set while making the API call, such as `Content-Type: application/json`, `Accept: */*`, etc.
+* **Base Url** 🔴: The Base URL of the Target REST API, such as `http://localhost:8092/v1/airline`.
+* **Path** 🔴: The path of the Target REST API. e.g. `/bookings/{pnr}`.
 * **Path Variables**: The names of path variables to be set while making the API call. Not required by create Api Tool API, but automatically extracted from give `path`.
 * **Query Parameters**: The names of query parameters to be passed while making the API call.
 * **Headers**: The runtime headers to be set while making the API call.
 * **Body Argument name**: The name of the body argument to be passed while making the API call.
 
 > [!NOTE]
-> The parameters marked with <span style="color:red">*</span> are mandatory to define a tool. 
+> The parameters marked with 🔴 are mandatory to define a tool. 
 > The AI agent just needs to know the tool name, description and input schema and tool metadata to call it.
 > MCP server uses The remaining parameters internally to make the actual API call. So the AI agent does not know how to make a REST API call but MCP server does.
 
