@@ -420,6 +420,9 @@ One Resource [Airport_IATA_Code_Lookup.md](rest-api-mcp-server/src/main/resource
 | Indira Gandhi International Airport               | Delhi       | India    | DEL                |
 | Chhatrapati Shivaji Maharaj International Airport | Mumbai      | India    | BOM                |
 
+> [!NOTE]
+> MCP server can be used by any MCP implementing AI client irrespective of language on implementation such as Java, Python and Type Script also.
+
 ### Testing MCP server with Claude Desktop
 You can test the MCP server using [Claude Desktop](https://claude.ai/download) by following these steps:
 * Go to **Claude > Settings > Developer > Edit Config**. It will open `claude_desktop_config.json` configuration file. On macOS, it is located at `~/Library/Application Support/Claude/claude_desktop_config.json`.
