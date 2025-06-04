@@ -443,8 +443,8 @@ You can test the MCP server using [Claude Desktop](https://claude.ai/download) b
 > [!IMPORTANT]
 > Set Java 21 path /bin/java in `command` and replace `<Your workspace>` with the actual path to your workspace where the MCP server project is located.
 * Restart Claude Desktop and Go to **Claude > Settings > Developer** to check if the MCP server is running. 
-  You will be able to see `rest-api-mcp-server` and status such as `running` or `failed`. 
-  You can find `Open Logs Folder`, clicking on which will open the logs folder (In Mac `~/Library/Application Support/Claude/claude_desktop.log`) and see logs.
+  You will be able to see `rest-api-mcp-server` and its status such as `running` or `failed`. 
+  You can find the logs by clicking on `Open Logs Folder`, which will open the logs folder (In Mac `~/Library/Application Support/Claude/claude_desktop.log`) and see logs.
 * If its successfully started, then you can see MCP Server in effect. Start conversation with Claude Desktop as elaborated in [Conversation with AI Chat Client](#Conversation-with-AI-Chat-Client) section.
 * Before your MCP tool usage, it will ask your permission.
 
