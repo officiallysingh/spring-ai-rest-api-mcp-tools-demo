@@ -19,10 +19,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AirlineChatClient {
+public class AirlineChatClientApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(AirlineChatClient.class, args);
+    SpringApplication.run(AirlineChatClientApplication.class, args);
   }
 
   //  private final String userInput = "What tools are available?";

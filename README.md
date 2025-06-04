@@ -145,7 +145,7 @@ curl -X 'PUT' \
 Spring boot project [**rest-api-mcp-server**](rest-api-mcp-server) **implements the core idea to convert REST API operations into MCP Tools** using [Spring AI](https://spring.io/projects/spring-ai) [MCP support](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-overview.html).
 Each tool is an object of class [**ApiToolCallback**](rest-api-mcp-server/src/main/java/ai/ksoot/rest/mcp/server/tool/domain/model/ApiToolCallback.java) and abstract the tool definition along with parameters and logic to execute the remote API call. 
 A tool is defined by the following properties:
-* [**ToolDefinition**](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/support/ToolDefinitions.html) 🔴: Definition used by the AI model to determine when and how to call the tool.
+* [**ToolDefinition**](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/support/ToolDefinitions.html) ⭑ : Definition used by the AI model to determine when and how to call the tool.
   * **Name** ⭑ : The tool name. Unique within the tool set provided to a model.
   * **Description ⭑ : The tool description, used by the AI model to determine what the tool does.
   * **Input Schema ⭑ : The schema of the parameters used to call the tool.
@@ -390,3 +390,10 @@ DELETE http://localhost:8090/v1/mcp/api-tools/name/{name}
 ```http
 GET http://localhost:8090/v1/mcp/api-tools/name/{name}/exists
 ```
+
+## Chat client to interact with AI Model and MCP server
+Spring boot project [**airline-chat-bot**](airline-chat-bot) implements the AI Chat client for communicating with an AI Model and MCP Server to assist Mock Airline using natural language.
+It is implemented using [Spring AI](https://spring.io/projects/spring-ai) [Chat Client API](https://docs.spring.io/spring-ai/reference/api/chatclient.html).
+
+Run [**AirlineChatClientApplication**](airline-chat-bot/src/main/java/ai/ksoot/mcp/airline/client/AirlineChatClientApplication.java) as Spring boot application and 
+Access Swagger UI at [http://localhost:8091/swagger-ui/index.html](http://localhost:8091/swagger-ui/index.html) to explore the available REST APIs.
