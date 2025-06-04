@@ -663,12 +663,12 @@ If you need any further assistance or wish to make a new booking, please let me 
 ---------------------------------------------------------------------------------------
 
 ## Further enhancements
-It can be enhanced with more features such as:
+It should be enhanced with the following additional features to make it production grade and more useful.
 * Manage Prompts to assist AI agents with pre-defined templates.
-* Manage Resources to provide file-like data that can be read by AI agents.
+* Manage Resources to provide file-like data that can be used in Context by AI agents.
 * Implement API to create API tools from a tool definition JSON file.
 * The target APIs can be secured with some scheme. So implementation needs to be done to handle the security aspects of the target APIs.
-* APIs can be arranged in groups to manage them better. An API group may contain base URL, security aspects, and other common properties which are currently duplicated across API Tools.  
+* APIs can be arranged in groups to manage them better. An API group may contain base URL, security aspects, `ToolCallResultConverter`, `ToolExecutionExceptionProcessor`, and other common properties which are currently duplicated across API Tools.  
   That would also help to change such common attributes in one place rather than changing them in all API tools.
 
 ## Licence
