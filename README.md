@@ -6,7 +6,7 @@
 ## Prerequisites
 
 [![Java](https://img.shields.io/badge/java-21-blue.svg)](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
-[![Java](https://img.shields.io/badge/spring_boot-3.4.4-blue.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/spring_boot-3.4.5-blue.svg)](https://spring.io/projects/spring-boot)
 [![Maven](https://img.shields.io/badge/maven-3.9.5-blue.svg)](https://maven.apache.org/)
 [![MongoDB](https://img.shields.io/badge/mongodb-6.0.6-blue.svg)](https://www.mongodb.com/)
 [![Docker](https://img.shields.io/badge/docker-20.10.24-blue.svg)](https://www.docker.com/)
