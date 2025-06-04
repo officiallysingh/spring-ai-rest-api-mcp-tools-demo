@@ -59,7 +59,7 @@ Configure the server through `application.properties`:
 
 ```properties
 # Server identification
-spring.ai.mcp.server.name=my-weather-server
+spring.ai.mcp.server.name=rest-api-mcp-server
 spring.ai.mcp.server.version=0.0.1
 
 # Server type (SYNC/ASYNC)
@@ -76,7 +76,6 @@ spring.ai.mcp.server.prompt-change-notification=true
 
 # Logging (required for STDIO transport)
 spring.main.banner-mode=off
-logging.file.name=./target/starter-webmvc-server.log
 ```
 
 ## Available Tools
@@ -229,5 +228,5 @@ java -Dspring.ai.mcp.client.sse.connections.weather-server.url=http://localhost:
 * [Spring AI Documentation](https://docs.spring.io/spring-ai/reference/)
 * [MCP Server Boot Starter](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html)
 * [MCP Client Boot Starter](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-client-docs.html)
-* [Model Context Protocol Specification](https://modelcontextprotocol.github.io/specification/)
+* [Model Context Protocol Specification](https://github.com/modelcontextprotocol/modelcontextprotocol)
 * [Spring Boot Auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.developing-auto-configuration)

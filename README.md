@@ -254,7 +254,7 @@ public ToolCallback toUpperCase() {
 }
 ```
 
-But it is recommended to create MCP tools for REST API calls using APIs provided as follows.
+**But it is recommended to create MCP tools for REST API calls using APIs provided as follows.**
 > [!IMPORTANT]
 > The simplest way to create MCP tools for REST API calls is to upload the OpenAPI spec and take the response and parse to another API to create all tools at once. 
 > The available APIs are listed below.
@@ -401,6 +401,11 @@ GET http://localhost:8090/v1/mcp/api-tools/name/{name}/exists
 GET http://localhost:8090/v1/mcp/api-tools/audit-history
 ```
 
+### Tool Changes notifications
+The MCP server supports [Server-Sent Events (SSE)](https://spring.io/blog/2017/03/08/spring-tips-server-sent-events-sse) to notify clients about changes in API tools as per protocol. 
+[ToolChangeListener](rest-api-mcp-server/src/main/java/ai/ksoot/rest/mcp/server/tool/domain/service/ToolChangeListener.java) handles the tool change events and notifies the clients subscribed to the SSE endpoint. 
+So if appropriately handled by the clients, any API Tool changes such as creation, update or deletion are notified to the clients in real-time and client can immediately start using the same.
+
 ### Other Capabilities
 Though the main focus of this project is to demonstrate how to create MCP tools for REST APIs, but it can also be used to manage **Resources** and **Prompts** as well.  
 One Resource [Airport_IATA_Code_Lookup.md](rest-api-mcp-server/src/main/resources/Airport_IATA_Code_Lookup.md) is used to lookup the IATA codes of airports, which can be used by AI agents to get the airport codes for given origin and destination location names as follows.  
@@ -411,6 +416,38 @@ One Resource [Airport_IATA_Code_Lookup.md](rest-api-mcp-server/src/main/resource
 | Los Angeles International Airport                 | Los Angeles | USA      | LAX                |
 | Indira Gandhi International Airport               | Delhi       | India    | DEL                |
 | Chhatrapati Shivaji Maharaj International Airport | Mumbai      | India    | BOM                |
+
+### Testing MCP server with Claude Desktop
+You can test the MCP server using [Claude Desktop](https://claude.ai/download) by following these steps:
+* Go to Claude -> Settings > Developer > Edit Config. It will open `claude_desktop_config.json` configuration file. On macOS, it is located at `~/Library/Application Support/Claude/claude_desktop_config.json`.
+* Add the following configuration to the `claude_desktop_config.json` file:
+```json
+{
+  "mcpServers": {
+    "rest-api-mcp-server": {
+      "command": "~/.sdkman/candidates/java/21.0.6-tem/bin/java",
+      "args": [
+        "-jar",
+        "<Your workspace>/spring-ai-rest-api-mcp-tools-demo/rest-api-mcp-server/target/rest-api-mcp-server-0.0.1.jar"
+      ]
+    }
+  }
+}
+```
+> [!IMPORTANT]
+> Set Java 21 path /java in `command` and replace `<Your workspace>` with the actual path to your workspace where the MCP server project is located.
+* Restart Claude Desktop and Go to Claude -> Settings > Developer to check if the MCP server is running. 
+  You will be able to see `rest-api-mcp-server` and status such as `running` or `failed`. 
+  You can find `Open Logs Folder`, clicking on which will open the logs folder (In Mac `~/Library/Application Support/Claude/claude_desktop.log`) and see logs.
+* If its successfully started, then you can see MCP in effect.
+
+> [!CAUTION]
+> Though above-mentioned configurations are correct, but it did not work for me, may be because of evolving MCP spec changes. 
+> I got following error while trying to run the MCP server from Claude Desktop.
+```text
+2025-06-01T16:11:54.816Z [info] [rest-api-mcp-server] Message from client: {"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0}
+2025-06-01T16:11:55.327Z [error] [rest-api-mcp-server] Unexpected non-whitespace character after JSON at position 4 (line 1 column 5)
+```
 
 ## Chat client to interact with AI Model and MCP server
 Spring boot project [**airline-chat-bot**](airline-chat-bot) implements the AI Chat client for communicating with an AI Model and MCP Server to assist Mock Airline using natural language.
@@ -473,6 +510,13 @@ spring:
       api-key: ${OPENAI_API_KEY}
 ```
 * Pass VM Option `-DANTHROPIC_API_KEY=your_anthropic_api_key` in Run configurations to use OpenAI model.
+
+### System Prompt
+A System Prompt is a hidden instruction given to an AI model at the beginning of a conversation to shape its behavior, tone, knowledge scope, and response style. 
+Unlike user input, the system prompt is not visible during the chat but plays a crucial role in guiding the AI’s personality and capabilities.
+The AI chat client workflow is controlled by a [**System Prompt**](airline-chat-bot/src/main/java/ai/ksoot/mcp/airline/client/Prompts.java) that defines the role of the AI assistant and its capabilities.  
+The system prompt has direct relation with the MCP tools created for the Mock Airline REST service. 
+It contais the instructions for the AI model to use the MCP tools, Resources to accomplish given tasks.
 
 ### Conversation with AI Chat Client
 You can use following API to chat with Mock Airline chat assistant.
@@ -624,7 +668,11 @@ Open source [**The MIT License**](http://www.opensource.org/licenses/mit-license
 Please give me a :star: and a :clap: on [**medium.com**](https://officiallysingh.medium.com/spark-spring-boot-starter-e206def765b9) if you find it helpful.
 
 ## References
+- [Spring AI Documentation](https://docs.spring.io/spring-ai/reference/)
+- [MCP Server Boot Starter](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html)
+- [MCP Client Boot Starter](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-client-docs.html)
 - [Model Context Protocol](https://modelcontextprotocol.io/introduction)
-- [Spring AI](https://spring.io/projects/spring-ai)
+- [Model Context Protocol Specification](https://github.com/modelcontextprotocol/modelcontextprotocol)
+- [Spring Boot Auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.developing-auto-configuration)
 - [A Visual guide to LLM agents](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-llm-agents) by [Maarten Grootendorst](https://substack.com/@maartengrootendorst)
 - [A visual guide to reasoning LLMs](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-reasoning-llms) by [Maarten Grootendorst](https://substack.com/@maartengrootendorst)
