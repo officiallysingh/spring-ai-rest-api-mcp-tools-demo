@@ -419,7 +419,7 @@ One Resource [Airport_IATA_Code_Lookup.md](rest-api-mcp-server/src/main/resource
 
 ### Testing MCP server with Claude Desktop
 You can test the MCP server using [Claude Desktop](https://claude.ai/download) by following these steps:
-* Go to Claude -> Settings > Developer > Edit Config. It will open `claude_desktop_config.json` configuration file. On macOS, it is located at `~/Library/Application Support/Claude/claude_desktop_config.json`.
+* Go to **Claude > Settings > Developer > Edit Config**. It will open `claude_desktop_config.json` configuration file. On macOS, it is located at `~/Library/Application Support/Claude/claude_desktop_config.json`.
 * Add the following configuration to the `claude_desktop_config.json` file:
 ```json
 {
@@ -436,10 +436,11 @@ You can test the MCP server using [Claude Desktop](https://claude.ai/download) b
 ```
 > [!IMPORTANT]
 > Set Java 21 path /java in `command` and replace `<Your workspace>` with the actual path to your workspace where the MCP server project is located.
-* Restart Claude Desktop and Go to Claude -> Settings > Developer to check if the MCP server is running. 
+* Restart Claude Desktop and Go to **Claude > Settings > Developer** to check if the MCP server is running. 
   You will be able to see `rest-api-mcp-server` and status such as `running` or `failed`. 
   You can find `Open Logs Folder`, clicking on which will open the logs folder (In Mac `~/Library/Application Support/Claude/claude_desktop.log`) and see logs.
-* If its successfully started, then you can see MCP in effect.
+* If its successfully started, then you can see MCP Server in effect. Start conversation with Claude Desktop as elaborated in [Conversation with AI Chat Client](#Conversation-with-AI-Chat-Client) section.
+* Before your MCP tool usage, it will ask your permission.
 
 > [!CAUTION]
 > Though above-mentioned configurations are correct, but it did not work for me, may be because of evolving MCP spec changes. 
