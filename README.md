@@ -256,7 +256,7 @@ public ToolCallback toUpperCase() {
 
 **But it is recommended to create MCP tools for REST API calls using APIs provided as follows.**
 > [!IMPORTANT]
-> The simplest way to create MCP tools for REST API calls is to upload the OpenAPI spec and take the response and parse to another API to create all tools at once. 
+> The simplest way to create MCP tools for REST API calls is to upload the OpenAPI spec and take the response and pass to another API to create all tools at once. 
 > The available APIs are listed below.
 
 ### Following are the available MCP server APIs
@@ -370,7 +370,7 @@ POST http://localhost:8090/v1/mcp/api-tools/all
 ```
 > [!IMPORTANT]
 > The Parsed OpenAPI spec response may not contain a good enough Tool name and description to be useful for AI agent. 
-> So you may need to update the Tool name and description in the response before passing it to this API.
+> So you may need to update the Tool name and description in request before passing it to this API.
 > Also, some tools with given name may already exist, so you may need to change the names or remove those tools from the request to this API.
 
 #### Other APIs
