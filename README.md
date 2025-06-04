@@ -668,7 +668,7 @@ It should be enhanced with the following additional features to make it producti
 * Manage Resources to provide file-like data that can be used in Context by AI agents.
 * Implement API to create API tools from a tool definition JSON file.
 * The target APIs can be secured with some scheme. So implementation needs to be done to handle the security aspects of the target APIs.
-* APIs can be arranged in groups to manage them better. An API group may contain base URL, security aspects, `ToolCallResultConverter`, `ToolExecutionExceptionProcessor`, and other common properties which are currently duplicated across API Tools.  
+* APIs can be arranged in groups to manage them better. An API group may contain base URL, security aspects, `ToolCallResultConverter`, `ToolExecutionExceptionProcessor`, and other common properties which are currently duplicated across API Tools. 
   That would also help to change such common attributes in one place rather than changing them in all API tools.
 
 ## Licence
