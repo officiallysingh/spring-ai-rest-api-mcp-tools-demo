@@ -172,9 +172,9 @@ A tool is defined by the following properties:
 * **Body Argument name**: The name of the body argument to be passed while making the API call. Cannot be used with `GET` method.
 
 > [!NOTE]
-> The parameters marked with ⭑ are mandatory to define a tool. 
+> The parameters marked with ⭑ are mandatory to define an API tool. 
 > The AI agent just needs to know the tool name, description and input schema and tool metadata to call it.
-> MCP server uses The remaining parameters internally to make the actual API call. So the AI agent does not know how to make a REST API call but MCP server does.
+> MCP server uses the remaining parameters internally to make the actual API call. So the AI agent does not know how to make a REST API call but MCP server does.
 
 ### Running MCP Server
 Run [**RestApiMCPServer**](rest-api-mcp-server/src/main/java/ai/ksoot/rest/mcp/server/RestApiMCPServer.java) as Spring boot application.
@@ -309,7 +309,7 @@ curl -X 'GET' \
 | `id`      | `String` | API Tool Id | Yes      | 68106d632e1b8a3710692a85 |
 
 #### Get an API Tool by Name
-To search available flights for given origin, destination and departure date.
+Find an API tool by given name.
 ```http
 GET /v1/mcp/api-tools/name/{name}
 ```
@@ -357,7 +357,7 @@ curl -X 'POST' \
 ```
 
 Upload OpenAPI spec file [airline.json](rest-api-mcp-server/src/main/resources/oas/airline.json) for Mock Airline REST server.  
-You will get a response [airline-api-tools.json](rest-api-mcp-server/src/main/resources/oas/ailine-api-tools.json) with all the API tools derived from the APIs defined in the OpenAPI spec.  
+You will get a response [airline-api-tools.json](rest-api-mcp-server/src/main/resources/oas/ailine-api-tools.json) with all the API tools derived from the APIs defined in the OpenAPI spec. 
 You can download the response `json` from Swagger response of this API call.
 
 > [!IMPORTANT]
@@ -411,7 +411,7 @@ So if appropriately handled by the clients, any API Tool changes such as creatio
 
 ### Other Capabilities
 Though the main focus of this project is to demonstrate how to create MCP tools for REST APIs, but it can also be used to manage **Resources** and **Prompts** as well.  
-One Resource [Airport_IATA_Code_Lookup.md](rest-api-mcp-server/src/main/resources/Airport_IATA_Code_Lookup.md) is used to lookup the IATA codes of airports, which can be used by AI agents to get the airport codes for given origin and destination location names as follows.  
+A **Resource** [Airport_IATA_Code_Lookup.md](rest-api-mcp-server/src/main/resources/Airport_IATA_Code_Lookup.md) is used by AI agents to look up the IATA codes of airports for given origin and destination location names as follows.  
 
 | Location name                                     | City        | Country  | Airport IATA Code  |
 |---------------------------------------------------|-------------|----------|--------------------|
@@ -421,7 +421,7 @@ One Resource [Airport_IATA_Code_Lookup.md](rest-api-mcp-server/src/main/resource
 | Chhatrapati Shivaji Maharaj International Airport | Mumbai      | India    | BOM                |
 
 > [!NOTE]
-> MCP server can be used by any MCP implementing AI client irrespective of language on implementation such as Java, Python and Type Script also.
+> MCP server can be used by any MCP implementing AI client irrespective of language of implementation such as Java, Python and Type Script also.
 
 ### Testing MCP server with Claude Desktop
 You can test the MCP server using [Claude Desktop](https://claude.ai/download) by following these steps:
@@ -441,7 +441,7 @@ You can test the MCP server using [Claude Desktop](https://claude.ai/download) b
 }
 ```
 > [!IMPORTANT]
-> Set Java 21 path /java in `command` and replace `<Your workspace>` with the actual path to your workspace where the MCP server project is located.
+> Set Java 21 path /bin/java in `command` and replace `<Your workspace>` with the actual path to your workspace where the MCP server project is located.
 * Restart Claude Desktop and Go to **Claude > Settings > Developer** to check if the MCP server is running. 
   You will be able to see `rest-api-mcp-server` and status such as `running` or `failed`. 
   You can find `Open Logs Folder`, clicking on which will open the logs folder (In Mac `~/Library/Application Support/Claude/claude_desktop.log`) and see logs.
@@ -469,10 +469,10 @@ Run [**AirlineChatClientApplication**](airline-chat-bot/src/main/java/ai/ksoot/m
 
 > [!CAUTION]
 > This Chat client demo does not pick the real-time MCP tool changes from the MCP server. 
-> So create the MCP tools before starting the chat client.
+> So create the APT tools in MCP server before starting the chat client.
 
 ### Configurations
-`rest-api-mcp-server` MCP server is configured with its `url` below. 
+Make sure `rest-api-mcp-server` MCP server is configured with its `url` below and `toolcallback.enabled` is set to `true`. 
 ```yaml
 spring:
   ai:
