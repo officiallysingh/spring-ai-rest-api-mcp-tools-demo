@@ -166,7 +166,7 @@ A tool is defined by the following properties:
 * **Body Argument name**: The name of the body argument to be passed while making the API call.
 
 > [!NOTE]
-> The parameters marked with 🔴 are mandatory to define a tool. 
+> The parameters marked with ⭑ are mandatory to define a tool. 
 > The AI agent just needs to know the tool name, description and input schema and tool metadata to call it.
 > MCP server uses The remaining parameters internally to make the actual API call. So the AI agent does not know how to make a REST API call but MCP server does.
 
