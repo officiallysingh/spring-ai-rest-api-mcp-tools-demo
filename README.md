@@ -4,6 +4,10 @@
 [![Maven](https://img.shields.io/badge/maven-3.9.5-blue.svg)](https://maven.apache.org/)
 [![MongoDB](https://img.shields.io/badge/mongodb-6.0.6-blue.svg)](https://www.mongodb.com/)
 [![Docker](https://img.shields.io/badge/docker-20.10.24-blue.svg)](https://www.docker.com/)
+
+
+![MCP Overview](https://github.com/officiallysingh/spring-ai-rest-api-mcp-tools-demo/blob/main/img/MCP_Overview.png)
+
 ### Building an MCP Server with Spring Boot and Spring AI
 
 ## Prerequisites
