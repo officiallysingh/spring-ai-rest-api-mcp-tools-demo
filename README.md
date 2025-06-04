@@ -395,13 +395,27 @@ GET http://localhost:8090/v1/mcp/api-tools/name/{name}/exists
 GET http://localhost:8090/v1/mcp/api-tools/audit-history
 ```
 
+### Other Capabilities
+Though the main focus of this project is to demonstrate how to create MCP tools for REST APIs, but it can also be used to manage **Resources** and **Prompts** as well.  
+One Resource [Airport_IATA_Code_Lookup.md](rest-api-mcp-server/src/main/resources/Airport_IATA_Code_Lookup.md) is used to lookup the IATA codes of airports, which can be used by AI agents to get the airport codes for given origin and destination location names as follows.  
+
+| Location name                                     | City        | Country  | Airport IATA Code  |
+|---------------------------------------------------|-------------|----------|--------------------|
+| John F. Kennedy International Airport             | New York    | USA      | JFK                |
+| Los Angeles International Airport                 | Los Angeles | USA      | LAX                |
+| Indira Gandhi International Airport               | Delhi       | India    | DEL                |
+| Chhatrapati Shivaji Maharaj International Airport | Mumbai      | India    | BOM                |
+
 ## Chat client to interact with AI Model and MCP server
 Spring boot project [**airline-chat-bot**](airline-chat-bot) implements the AI Chat client for communicating with an AI Model and MCP Server to assist Mock Airline using natural language.
 It is implemented using [Spring AI](https://spring.io/projects/spring-ai) [Chat Client API](https://docs.spring.io/spring-ai/reference/api/chatclient.html).
 
 Run [**AirlineChatClientApplication**](airline-chat-bot/src/main/java/ai/ksoot/mcp/airline/client/AirlineChatClientApplication.java) as Spring boot application
+* Make sure [**MockAirlineApplication**](mock-airline-service/src/main/java/com/ksoot/airline/MockAirlineApplication.java) is running on configured port.
+* Make sure [**RestApiMCPServer**](rest-api-mcp-server/src/main/java/ai/ksoot/rest/mcp/server/RestApiMCPServer.java) is running on configured port.
 * Pass the `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` as VM option to use OpenAI or Anthropic AI model respectively. e.g. `-DOPENAI_API_KEY=your_openai_api_key` or `-DANTHROPIC_API_KEY=your_anthropic_api_key`
-* Access Swagger UI at [http://localhost:8091/swagger-ui/index.html](http://localhost:8091/swagger-ui/index.html) to explore the available REST APIs.
+* Access Swagger UI at [http://localhost:8091/swagger-ui/index.html](http://localhost:8091/swagger-ui/index.html) to explore the available REST API to chat with the client.
+* The logs for application do not show up in the console, so you can check the logs in [airline-chat-bot.log](logs/airline-chat-bot.log) file.
 
 ### Configurations
 `rest-api-mcp-server` MCP server is configured with its `url` below. 
@@ -421,36 +435,38 @@ spring:
 Chat client can use any AI model that supports MCP tools, such as OpenAI or Anthropic.
 
 #### Using OpenAI model
-Make sure following maven dependencies are added in `pom.xml` file.
+* Make sure following maven dependencies are added in `pom.xml` file.
 ```xml
 <dependency>
     <groupId>org.springframework.ai</groupId>
     <artifactId>spring-ai-starter-model-openai</artifactId>
 </dependency>
 ```
-Put configuration in `application.yml` file as follows.
+* Put configuration in `application.yml` file as follows.
 ```yaml
 spring:
   ai:
     anthropic:
       api-key: ${ANTHROPIC_API_KEY}
 ```
+* Pass VM Option `-DOPENAI_API_KEY=your_openai_api_key` in Run configurations to use OpenAI model.
 
 #### Using Anthropic AI model
-Make sure following maven dependencies are added in `pom.xml` file.
+* Make sure following maven dependencies are added in `pom.xml` file.
 ```xml
 <dependency>
     <groupId>org.springframework.ai</groupId>
     <artifactId>spring-ai-starter-model-anthropic</artifactId>
 </dependency>
 ```
-Put configuration in `application.yml` file as follows.
+* Put configuration in `application.yml` file as follows.
 ```yaml
 spring:
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
 ```
+* Pass VM Option `-DANTHROPIC_API_KEY=your_anthropic_api_key` in Run configurations to use OpenAI model.
 
 ### Conversation with AI Chat Client
 You can use following API to chat with Mock Airline chat assistant.
@@ -469,15 +485,18 @@ curl -X 'POST' \
 }'
 ```
 
-**Following is the example conversation with AI Chat client**.
+**Following is the example conversation with AI Chat client**.  
+Make the chat API call with the below prompts in sequence as given in **_User_** section.  
+Or use Postman Collection [airline-chat-bot.postman_collection.json](Mock%20Airline%20Chat%20assitant.postman_collection.json) and make API calls in sequence.
+> [!NOTE]
+> Change departure date to tomorrow's date in search flight request and change PNR in requests to your booking PNR.
 ---------------------------------------------------------------------------------------
-**User**: Hi
-**Assistant**: Hello! How can I assist you today? Are you looking to search for flights or retrieve booking information?  
+**_User_**: Hi  
+**_Assistant_**: Hello! How can I assist you today? Are you looking to search for flights or retrieve booking information?   
 
-**User**: I want to travel from Delhi to New York. I want to depart on 2025-06-05, 1 adult and one child
-**Assistant**: I found a flight for you from Delhi to New York on June 5, 2025. Here are the details:
-
-### Flight Details:
+**_User_**: I want to travel from Delhi to New York. I want to depart on 2025-06-05, 1 adult and one child  
+**_Assistant_**: I found a flight for you from Delhi to New York on June 5, 2025. Here are the details:  
+**Flight Details**:
 - **Flight Number:** 6E99
 - **Airline:** IndiGo
 - **Departure:** June 5, 2025, at 14:06 (Delhi - Indira Gandhi International Airport)
@@ -489,7 +508,117 @@ Would you like to proceed with booking this flight? If so, please provide the fo
 1. **Adult's First Name**
 2. **Adult's Last Name**
 3. **Child's First Name**
-4. **Child's Last Name**
-  
-**User**: Yes, please book this flight for me. My name is Rajveer Singh and my son is Jordan Singh.
+4. **Child's Last Name**  
+
+**_User_**: Yes, please book this flight for me. My name is Rajveer Singh and my son is Jordan Singh.  
+**_Assistant_**: Your flight has been successfully booked! Here are the details:
+
+**Booking Confirmation**
+- **PNR:** V2D8Y
+- **Flight Number:** 6E986
+- **Airline:** IndiGo
+- **Departure Airport:** Indira Gandhi International Airport (DEL), Delhi, India
+- **Arrival Airport:** John F. Kennedy International Airport (JFK), New York, USA
+- **Departure Date:** June 5, 2025, at 21:32
+- **Arrival Date:** June 6, 2025, at 21:32
+- **Passengers:**
+  - **Rajveer Singh (Adult)**
+  - **Juno Singh (Child)**
+- **Price:** ₹550.75 (INR)
+- **Services Included:**
+  - 1st Bag (up to 20 Kg)
+  - Meal (Snack)
+
+If you need any further assistance or wish to add more services, feel free to ask! Safe travels!
+
+**_User_**: I want to add an extra bag special service.  
+**_Assistant_**: The additional bag service has been successfully added to your booking!
+
+**Updated Booking Details**:
+- **PNR:** V2D8Y
+- **Flight Number:** 6E986
+- **Airline:** IndiGo
+- **Departure Airport:** Indira Gandhi International Airport (DEL), Delhi, India
+- **Arrival Airport:** John F. Kennedy International Airport (JFK), New York, USA
+- **Departure Date:** June 5, 2025, at 21:32
+- **Passengers:**
+  - **Rajveer Singh (Adult)**
+  - **Juno Singh (Child)**
+- **Current Services:**
+  - 1st Bag (up to 20 Kg)
+  - Meal (Snack)
+  - **Additional Bag Service** (added)
+
+If you need any more assistance or wish to add any other services, feel free to let me know! Safe travels!
+
+**_User_**: I want to see my flight booking details. My PNR is V2D8Y.  
+**_Assistant_**: Here are your flight booking details for PNR **V2D8Y**:
+
+**Booking Information**
+- **Flight Number:** 6E986
+- **Airline:** IndiGo
+- **Departure Airport:** Indira Gandhi International Airport (DEL), Delhi, India
+- **Arrival Airport:** John F. Kennedy International Airport (JFK), New York, USA
+- **Departure Date:** June 5, 2025, at 21:32
+- **Arrival Date:** June 6, 2025, at 21:32
+- **Passenger Details:**
+  - **Rajveer Singh (Adult)**
+  - **Juno Singh (Child)**
+- **Current Services:**
+  - 1st Bag (up to 20 Kg)
+  - Meal (Snack)
+  - **Additional Bag Service** (2nd bag up to 20 Kg)
+- **Booking Status:** Confirmed
+- **Total Price:** ₹550.75 (INR)
+
+If you would like to add any more services, make modifications, or need further assistance, please let me know!
+
+**_User_**: I want to cancel my booking.  
+**_Assistant_**: Here are the booking details for your flight with PNR **V2D8Y**:
+
+**Booking Information**
+- **Flight Number:** 6E986
+- **Airline:** IndiGo
+- **Departure Airport:** Indira Gandhi International Airport (DEL), Delhi, India
+- **Arrival Airport:** John F. Kennedy International Airport (JFK), New York, USA
+- **Departure Date:** June 5, 2025, at 21:32
+- **Passengers:**
+  - **Rajveer Singh (Adult)**
+  - **Juno Singh (Child)**
+- **Current Services:**
+  - 1st Bag (up to 20 Kg)
+  - Meal (Snack)
+  - Additional Bag Service (2nd bag up to 20 Kg)
+- **Booking Status:** Confirmed
+- **Total Price:** ₹550.75 (INR)
+
+Would you like to proceed with the cancellation of this booking? Please confirm, and I will process the cancellation for you.
+
+**_User_**: Yes, I confirm. Proceed with cancellation.  
+**_Assistant_**: Your booking with PNR **V2D8Y** has been successfully cancelled.
+
+If you need any further assistance or wish to make a new booking, please let me know!
+
 ---------------------------------------------------------------------------------------
+
+## Further enhancements
+It can be enhanced with more features such as:
+* Manage Prompts to assist AI agents with pre-defined templates.
+* Manage Resources to provide file-like data that can be read by AI agents.
+* Implement API to create API tools from a tool definition JSON file.
+* The target APIs can be secured with some scheme. So implementation needs to be done to handle the security aspects of the target APIs.
+* APIs can be arranged in groups to manage them better. An API group may contain base URL, security aspects, and other common properties which are currently duplicated across API Tools.  
+  That would also help to change such common attributes in one place rather than changing them in all API tools.
+
+## Licence
+Open source [**The MIT License**](http://www.opensource.org/licenses/mit-license.php)
+
+## Authors and acknowledgment
+[**Rajveer Singh**](https://www.linkedin.com/in/rajveer-singh-589b3950/), In case you find any issues or need any support, please email me at raj14.1984@gmail.com.
+Please give me a :star: and a :clap: on [**medium.com**](https://officiallysingh.medium.com/spark-spring-boot-starter-e206def765b9) if you find it helpful.
+
+## References
+- [Model Context Protocol](https://modelcontextprotocol.io/introduction)
+- [Spring AI](https://spring.io/projects/spring-ai)
+- [A Visual guide to LLM agents](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-llm-agents) by [Maarten Grootendorst](https://substack.com/@maartengrootendorst)
+- [A visual guide to reasoning LLMs](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-reasoning-llms) by [Maarten Grootendorst](https://substack.com/@maartengrootendorst)

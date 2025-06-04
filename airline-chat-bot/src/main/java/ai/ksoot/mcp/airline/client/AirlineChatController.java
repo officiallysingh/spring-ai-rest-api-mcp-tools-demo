@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -89,8 +88,7 @@ public class AirlineChatController {
   @ToString
   static class ChatRequest {
 
-    @NotEmpty
-    private String prompt;
+    @NotEmpty private String prompt;
 
     //    private Map<String, String> variables;
 

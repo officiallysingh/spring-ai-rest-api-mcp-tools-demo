@@ -4,115 +4,21 @@ public class ApiSchema {
 
   public static final String SEARCH_FLIGHTS_SCHEMA =
       """
-        "{
-          "$schema" : "https://json-schema.org/draft/2020-12/schema",
-          "type" : "object",
-          "properties" : {
-            "airShopRequest" : {
-              "type" : "object",
-              "description" : "Search Flight request",
-              "properties" : {
-                "origin" : {
-                  "type" : "string",
-                  "description" : "Departure airport",
-                  "enum" : [ "JFK", "LAX", "DEL", "BOM" ],
-                  "example" : "DEL"
-                },
-                "destination" : {
-                  "type" : "string",
-                  "description" : "Arrival airport",
-                  "enum" : [ "JFK", "LAX", "DEL", "BOM" ],
-                  "example" : "JFK"
-                },
-                "departureDate" : {
-                  "type" : "string",
-                  "format" : "date",
-                  "description" : "Departure Date",
-                  "example" : "2025-04-21"
-                }
-              },
-              "required" : [ "departureDate", "destination", "origin" ]
-            }
-          },
-          "required" : [ "airShopRequest" ],
-          "additionalProperties" : false
-        }"
-        """;
+      "{\\n  \\"$schema\\" : \\"https://json-schema.org/draft/2020-12/schema\\",\\n  \\"type\\" : \\"object\\",\\n  \\"properties\\" : {\\n    \\"airShopRequest\\" : {\\n      \\"type\\" : \\"object\\",\\n      \\"description\\" : \\"Search Flight request\\",\\n      \\"properties\\" : {\\n        \\"origin\\" : {\\n          \\"type\\" : \\"string\\",\\n          \\"description\\" : \\"Departure airport\\",\\n          \\"enum\\" : [ \\"JFK\\", \\"LAX\\", \\"DEL\\", \\"BOM\\" ],\\n          \\"example\\" : \\"DEL\\"\\n        },\\n        \\"destination\\" : {\\n          \\"type\\" : \\"string\\",\\n          \\"description\\" : \\"Arrival airport\\",\\n          \\"enum\\" : [ \\"JFK\\", \\"LAX\\", \\"DEL\\", \\"BOM\\" ],\\n          \\"example\\" : \\"JFK\\"\\n        },\\n        \\"departureDate\\" : {\\n          \\"type\\" : \\"string\\",\\n          \\"format\\" : \\"date\\",\\n          \\"description\\" : \\"Departure Date\\",\\n          \\"example\\" : \\"2025-04-21\\"\\n        }\\n      },\\n      \\"required\\" : [ \\"departureDate\\", \\"destination\\", \\"origin\\" ]\\n    }\\n  },\\n  \\"required\\" : [ \\"airShopRequest\\" ],\\n  \\"additionalProperties\\" : false\\n}"
+      """;
 
   public static final String BOOK_FLIGHT_SCHEMA =
       """
-      {
-        "$schema" : "https://json-schema.org/draft/2020-12/schema",
-        "type" : "object",
-        "properties" : {
-          "bookingRequest" : {
-            "type" : "object",
-            "properties" : {
-              "flightNumber" : {
-                "type" : "string",
-                "description" : "Flight number"
-              },
-              "passengers" : {
-                "description" : "List of Passenger details",
-                "type" : "array",
-                "items" : {
-                  "type" : "object",
-                  "properties" : {
-                    "firstName" : {
-                      "type" : "string",
-                      "description" : "Passenger First name"
-                    },
-                    "lastName" : {
-                      "type" : "string",
-                      "description" : "Passenger Last name"
-                    },
-                    "type" : {
-                      "type" : "string",
-                      "enum" : [ "ADULT", "CHILD" ],
-                      "description" : "Passenger type, Adult or Child"
-                    }
-                  },
-                  "required" : [ "firstName", "lastName", "type" ],
-                  "description" : "Passenger details"
-                }
-              }
-            },
-            "required" : [ "flightNumber", "passengers" ],
-            "description" : "Flight booking request"
-          }
-        },
-        "required" : [ "bookingRequest" ],
-        "additionalProperties" : false
-      }
+      "{\\n  \\"$schema\\" : \\"https://json-schema.org/draft/2020-12/schema\\",\\n  \\"type\\" : \\"object\\",\\n  \\"properties\\" : {\\n    \\"bookingRequest\\" : {\\n      \\"type\\" : \\"object\\",\\n      \\"description\\" : \\"Book Flight request\\",\\n      \\"properties\\" : {\\n        \\"flightNumber\\" : {\\n          \\"type\\" : \\"string\\",\\n          \\"description\\" : \\"Flight number\\",\\n          \\"example\\" : 60000000\\n        },\\n        \\"passengers\\" : {\\n          \\"type\\" : \\"array\\",\\n          \\"items\\" : {\\n            \\"type\\" : \\"object\\",\\n            \\"description\\" : \\"Passenger details\\",\\n            \\"properties\\" : {\\n              \\"firstName\\" : {\\n                \\"type\\" : \\"string\\",\\n                \\"description\\" : \\"Passenger First name\\",\\n                \\"example\\" : \\"Rajveer\\"\\n              },\\n              \\"lastName\\" : {\\n                \\"type\\" : \\"string\\",\\n                \\"description\\" : \\"Passenger Last name\\",\\n                \\"example\\" : \\"Singh\\"\\n              },\\n              \\"type\\" : {\\n                \\"type\\" : \\"string\\",\\n                \\"description\\" : \\"Passenger type, Adult or Child\\",\\n                \\"enum\\" : [ \\"ADULT\\", \\"CHILD\\" ],\\n                \\"example\\" : \\"ADULT\\"\\n              }\\n            },\\n            \\"required\\" : [ \\"firstName\\", \\"lastName\\", \\"type\\" ]\\n          },\\n          \\"description\\" : \\"List of Passenger details\\"\\n        }\\n      },\\n      \\"required\\" : [ \\"flightNumber\\", \\"passengers\\" ]\\n    }\\n  },\\n  \\"required\\" : [ \\"bookingRequest\\" ],\\n  \\"additionalProperties\\" : false\\n}"
       """;
 
   public static final String GET_BOOKING_SCHEMA =
       """
-      {
-         "$schema" : "https://json-schema.org/draft/2020-12/schema",
-         "type" : "object",
-         "properties" : {
-           "pnr" : {
-             "type" : "string"
-           }
-         },
-         "required" : [ "pnr" ],
-         "additionalProperties" : false
-       }
+      "{\\n  \\"$schema\\" : \\"https://json-schema.org/draft/2020-12/schema\\",\\n  \\"type\\" : \\"object\\",\\n  \\"properties\\" : {\\n    \\"pnr\\" : {\\n      \\"type\\" : \\"string\\"\\n    }\\n  },\\n  \\"required\\" : [ \\"pnr\\" ],\\n  \\"additionalProperties\\" : false\\n}"
       """;
 
   public static final String CANCEL_BOOKING_SCHEMA =
       """
-      {
-        "$schema" : "https://json-schema.org/draft/2020-12/schema",
-        "type" : "object",
-        "properties" : {
-          "pnr" : {
-            "type" : "string"
-          }
-        },
-        "required" : [ "pnr" ],
-        "additionalProperties" : false
-      }
+      "{\\n  \\"$schema\\" : \\"https://json-schema.org/draft/2020-12/schema\\",\\n  \\"type\\" : \\"object\\",\\n  \\"properties\\" : {\\n    \\"pnr\\" : {\\n      \\"type\\" : \\"string\\"\\n    }\\n  },\\n  \\"required\\" : [ \\"pnr\\" ],\\n  \\"additionalProperties\\" : false\\n}"
       """;
 }

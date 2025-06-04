@@ -2,12 +2,16 @@ package ai.ksoot.rest.mcp.server.tool.domain.service;
 
 import ai.ksoot.rest.mcp.server.adapter.repository.ApiToolCallbackRepository;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolCallback;
+import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolChangeEvent;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolRequest;
 import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolUpdateRequest;
 import com.ksoot.problem.core.Problems;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ai.tool.ToolCallback;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,8 @@ public class ApiToolService {
 
   private final ApiToolCallbackRepository apiToolCallbackRepository;
 
+  private final ApplicationEventPublisher applicationEventPublisher;
+
   @Transactional(readOnly = true)
   public boolean apiToolExists(final String name) {
     return this.apiToolCallbackRepository.existsByToolDefinitionName(name);
@@ -26,7 +32,7 @@ public class ApiToolService {
 
   @Transactional
   public ApiToolCallback createApiTool(final ApiToolRequest request) {
-    final ApiToolCallback apiTool =
+    ApiToolCallback apiToolCallback =
         ApiToolCallback.tool(request.getName(), request.getDescription(), request.getInputSchema())
             .baseUrl(request.getBaseUrl())
             .path(request.getPath())
@@ -36,12 +42,14 @@ public class ApiToolService {
             .defaultHeaders(request.getDefaultHeaders())
             .headers(request.getHeaders())
             .build();
-    return this.apiToolCallbackRepository.save(apiTool);
+    apiToolCallback = this.apiToolCallbackRepository.save(apiToolCallback);
+    this.applicationEventPublisher.publishEvent(ApiToolChangeEvent.ofCreate(apiToolCallback));
+    return apiToolCallback;
   }
 
   @Transactional
   public List<ApiToolCallback> createApiTools(final List<ApiToolRequest> requests) {
-    final List<ApiToolCallback> apiTools =
+    List<ApiToolCallback> apiToolCallbacks =
         requests.stream()
             .map(
                 request ->
@@ -55,24 +63,28 @@ public class ApiToolService {
                         .defaultHeaders(request.getDefaultHeaders())
                         .build())
             .toList();
-
-    return this.apiToolCallbackRepository.saveAll(apiTools);
+    apiToolCallbacks = this.apiToolCallbackRepository.saveAll(apiToolCallbacks);
+    this.applicationEventPublisher.publishEvent(ApiToolChangeEvent.ofCreate(apiToolCallbacks.stream().map(e -> (ToolCallback) e).toList()));
+    return apiToolCallbacks;
   }
 
   @Transactional
   public ApiToolCallback updateApiToolById(final String id, final ApiToolUpdateRequest request) {
-
-    final ApiToolCallback apiToolCallback = this.getApiToolById(id);
+    ApiToolCallback apiToolCallback = this.getApiToolById(id);
     this.updateApiTool(apiToolCallback, request);
-    return this.apiToolCallbackRepository.save(apiToolCallback);
+    apiToolCallback = this.apiToolCallbackRepository.save(apiToolCallback);
+    this.applicationEventPublisher.publishEvent(ApiToolChangeEvent.ofUpdate(apiToolCallback));
+    return apiToolCallback;
   }
 
   @Transactional
   public ApiToolCallback updateApiToolByName(
       final String name, final ApiToolUpdateRequest request) {
-    final ApiToolCallback apiToolCallback = this.getApiToolByName(name);
+    ApiToolCallback apiToolCallback = this.getApiToolByName(name);
     this.updateApiTool(apiToolCallback, request);
-    return this.apiToolCallbackRepository.save(apiToolCallback);
+    this.applicationEventPublisher.publishEvent(ApiToolChangeEvent.ofUpdate(apiToolCallback));
+    apiToolCallback = this.apiToolCallbackRepository.save(apiToolCallback);
+    return apiToolCallback;
   }
 
   private void updateApiTool(
@@ -107,16 +119,6 @@ public class ApiToolService {
     return this.apiToolCallbackRepository.findAll();
   }
 
-  //  @Transactional
-  //  public ApiToolCallback updateApiTool(final String id, final ApiToolUpdationRQ request) {
-  //    final ApiToolCallback apiTool =
-  // this.apiToolCallbackRepository.findById(id).orElseThrow(Problems::notFound);
-  //
-  //    Optional.ofNullable(request.getName()).ifPresent(apiTool::setName);
-  //
-  //    return this.apiToolCallbackRepository.save(apiTool);
-  //  }
-
   @Transactional
   public ApiToolCallback deleteApiToolById(final String id) {
     if (!this.apiToolCallbackRepository.existsById(id)) {
@@ -125,6 +127,7 @@ public class ApiToolService {
     ApiToolCallback apiToolCallback =
         this.apiToolCallbackRepository.findById(id).orElseThrow(Problems::notFound);
     this.apiToolCallbackRepository.deleteById(id);
+    this.applicationEventPublisher.publishEvent(ApiToolChangeEvent.ofDelete(apiToolCallback));
     return apiToolCallback;
   }
 
@@ -135,6 +138,7 @@ public class ApiToolService {
             .findByToolDefinitionName(name)
             .orElseThrow(Problems::notFound);
     this.apiToolCallbackRepository.deleteByToolDefinitionName(name);
+    this.applicationEventPublisher.publishEvent(ApiToolChangeEvent.ofDelete(apiToolCallback));
     return apiToolCallback;
   }
 

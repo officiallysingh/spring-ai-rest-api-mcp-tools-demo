@@ -14,14 +14,9 @@ import ai.ksoot.rest.mcp.server.tool.domain.model.*;
 import ai.ksoot.rest.mcp.server.tool.domain.service.ApiToolService;
 import ai.ksoot.rest.mcp.server.tool.domain.service.OpenApiSpecParser;
 import com.ksoot.problem.core.Problems;
-import io.modelcontextprotocol.server.McpServerFeatures;
-import io.modelcontextprotocol.server.McpSyncServer;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ai.mcp.McpToolUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -32,10 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequiredArgsConstructor
 class ApiToolController implements ApiToolApi {
-
-  @Lazy @Autowired private McpSyncServer mcpSyncServer;
-
-  private final ApiToolCallbackProvider apiToolCallbackProvider;
 
   private final ApiToolService apiToolService;
 
@@ -49,10 +40,6 @@ class ApiToolController implements ApiToolApi {
   @Override
   public ResponseEntity<APIResponse<?>> createApiTool(final ApiToolRequest request) {
     final ApiToolCallback toolCallback = this.apiToolService.createApiTool(request);
-    this.apiToolCallbackProvider.addApiTool(toolCallback);
-    final McpServerFeatures.SyncToolSpecification syncToolSpecification =
-        McpToolUtils.toSyncToolSpecification(toolCallback);
-    this.mcpSyncServer.addTool(syncToolSpecification);
 
     return ResponseEntity.created(
             linkTo(methodOn(ApiToolController.class).getApiToolById(toolCallback.getId()))
@@ -64,10 +51,6 @@ class ApiToolController implements ApiToolApi {
   @Override
   public ResponseEntity<APIResponse<?>> createApiTools(List<ApiToolRequest> requests) {
     final List<ApiToolCallback> toolCallbacks = this.apiToolService.createApiTools(requests);
-    this.apiToolCallbackProvider.addApiTools(toolCallbacks);
-    toolCallbacks.stream()
-        .map(McpToolUtils::toSyncToolSpecification)
-        .forEach(this.mcpSyncServer::addTool);
 
     return ResponseEntity.created(
             linkTo(methodOn(ApiToolController.class).getAllApiTools()).withSelfRel().toUri())
@@ -125,8 +108,6 @@ class ApiToolController implements ApiToolApi {
   @Override
   public ResponseEntity<APIResponse<?>> deleteApiToolById(final String id) {
     final ApiToolCallback apiToolCallback = this.apiToolService.deleteApiToolById(id);
-    this.apiToolCallbackProvider.removeApiTool(apiToolCallback.getToolDefinition().name());
-    this.mcpSyncServer.removeTool(apiToolCallback.getToolDefinition().name());
 
     return ResponseEntity.ok(
         APIResponse.newInstance().addSuccess(GeneralMessageResolver.RECORD_DELETED));
@@ -135,8 +116,6 @@ class ApiToolController implements ApiToolApi {
   @Override
   public ResponseEntity<APIResponse<?>> deleteApiToolByName(final String name) {
     final ApiToolCallback apiToolCallback = this.apiToolService.deleteApiToolByName(name);
-    this.apiToolCallbackProvider.removeApiTool(apiToolCallback.getToolDefinition().name());
-    this.mcpSyncServer.removeTool(apiToolCallback.getToolDefinition().name());
 
     return ResponseEntity.ok(
         APIResponse.newInstance().addSuccess(GeneralMessageResolver.RECORD_DELETED));
@@ -144,7 +123,7 @@ class ApiToolController implements ApiToolApi {
 
   @Override
   public PaginatedResource<ApiToolResponse> getApiTools(final Pageable pageRequest) {
-    Page<ApiToolCallback> apiToolsPage = this.apiToolService.getApiTools(pageRequest);
+    final Page<ApiToolCallback> apiToolsPage = this.apiToolService.getApiTools(pageRequest);
     return PaginatedResourceAssembler.assemble(apiToolsPage, API_TOOLS_LIST_TRANSFORMER);
   }
 

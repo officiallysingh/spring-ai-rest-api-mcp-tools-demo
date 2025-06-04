@@ -1,6 +1,6 @@
 package ai.ksoot.rest.mcp.server.tool.domain;
 
-import ai.ksoot.rest.mcp.server.tool.domain.model.ApiToolCallbackProvider;
+import ai.ksoot.rest.mcp.server.tool.domain.model.McpToolCallbackProvider;
 import ai.ksoot.rest.mcp.server.tool.domain.service.ApiToolService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.modelcontextprotocol.server.McpServerFeatures;
@@ -21,7 +21,7 @@ import org.springframework.util.MimeTypeUtils;
 @Configuration
 public class McpServerConfig {
 
-  private static final String MOCK_AIRLINE_BASE_URL = "http://localhost:8092";
+  //  private static final String MOCK_AIRLINE_BASE_URL = "http://localhost:8092";
 
   private final Resource airportsLookup;
 
@@ -35,12 +35,14 @@ public class McpServerConfig {
   }
 
   @Bean
-  public ApiToolCallbackProvider apiToolCallbackProvider() {
-    return ApiToolCallbackProvider.of(this.apiToolService.getAllApiTools());
+  public McpToolCallbackProvider apiToolCallbackProvider() {
+    return McpToolCallbackProvider.of(
+        this.apiToolService.getAllApiTools().stream().map(e -> (ToolCallback) e).toList());
   }
 
   public record TextInput(String input) {}
 
+  // At least one tool definition is required for MCP server to start
   @Bean
   public ToolCallback dummy() {
     return FunctionToolCallback.builder("dummy", (TextInput input) -> input.input().toUpperCase())
@@ -124,7 +126,7 @@ public class McpServerConfig {
   //  }
 
   @Bean
-  public List<McpServerFeatures.SyncResourceSpecification> myResources() throws IOException {
+  public List<McpServerFeatures.SyncResourceSpecification> mcpResources() throws IOException {
     final URI uri = this.airportsLookup.getURI();
     log.debug("Airports Lookup Resource uri: {}", uri);
     var airportCodesLookupResource =

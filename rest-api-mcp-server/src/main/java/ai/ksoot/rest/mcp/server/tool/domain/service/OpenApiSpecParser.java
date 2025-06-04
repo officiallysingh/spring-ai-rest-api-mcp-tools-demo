@@ -56,7 +56,7 @@ public class OpenApiSpecParser {
     final String baseUrl = openAPI.getServers().getFirst().getUrl();
 
     final Paths paths = openAPI.getPaths();
-    log.debug("--------------------  Parsed API Tool Callbacks  --------------------");
+    log.debug("--------------------  Parsed API Tool Definitions  --------------------");
     for (Map.Entry<String, PathItem> entry : paths.entrySet()) {
       final String path = entry.getKey();
       final PathItem pathItem = entry.getValue();

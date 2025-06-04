@@ -73,24 +73,24 @@ public class ApiToolRequest {
 
   @Schema(
       description = "Runtime Http Header names.",
-      requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+      requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "null")
   private List<String> headers;
 
   @NotEmpty
   @Schema(
       description =
           "Target REST API path. It should be relative to the base URL and may contain Path variables.",
-      example = "/v1/flight/{pnr}",
+      example = "/v1/airline/flights",
       requiredMode = Schema.RequiredMode.REQUIRED)
   private String path;
 
   @Schema(
       description = "Names of the request query parameters.",
-      requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+      requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "null")
   private List<String> queryParams = new ArrayList<>();
 
   @Schema(
       description = "Name of the request body argument.",
-      requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+      requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "null")
   private String bodyArg;
 }
