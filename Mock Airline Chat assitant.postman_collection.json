@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "6df965b6-208a-4faf-99e0-c3c367780992",
+		"name": "Mock Airline Chat assitant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1639624",
+		"_collection_link": "https://orange-shuttle-529992.postman.co/workspace/MLHub~d3ec7a6e-802d-457b-84e7-7f3137f55a57/collection/1639624-6df965b6-208a-4faf-99e0-c3c367780992?action=share&source=collection_link&creator=1639624"
+	},
+	"item": [
+		{
+			"name": "Hi",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"prompt\": \"Hi\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/v1/airline/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"v1",
+						"airline",
+						"chat"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\n  'http://localhost:8091/v1/airline/chat' \\\n  -H 'accept: */*' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"prompt\": \"Hi\"\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Flights - Specify tomorrow's date",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    // Change the date to tomorrows's date\n  \"prompt\": \"I want to travel from Delhi to New York. I want to depart on 2025-06-05, 1 adult and one child\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/v1/airline/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"v1",
+						"airline",
+						"chat"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\n  'http://localhost:8091/v1/airline/chat' \\\n  -H 'accept: */*' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"prompt\": \"I want to travel from Delhi to New York. I want to depart on 2025-06-05, 1 adult and one child\"\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Book Flight",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"prompt\": \"My name is Rajveer Singh, an adult and and I am travelling with my daughter Juno Singh, she is a child. Please go ahead with booking this flight\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/v1/airline/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"v1",
+						"airline",
+						"chat"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\n  'http://localhost:8091/v1/airline/chat' \\\n  -H 'accept: */*' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"prompt\": \"My name is Rajveer Singh, an adult and and I am travelling with my daughter Juno Singh, she is a child. Please go ahead with booking this flight\"\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Add SSL to Booking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"prompt\": \"I want to add an extra bag special service\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/v1/airline/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"v1",
+						"airline",
+						"chat"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\n  'http://localhost:8091/v1/airline/chat' \\\n  -H 'accept: */*' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"prompt\": \"I want to add an extra bag special service\"\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Booking details by PNR - Put your PNR in request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    // replace with your booking PNR received in response to Book Flight API call\n  \"prompt\": \"I want to see my flight booking details. My PNR is 89VTY4\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/v1/airline/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"v1",
+						"airline",
+						"chat"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\n  'http://localhost:8091/v1/airline/chat' \\\n  -H 'accept: */*' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"prompt\": \"I want to see my flight booking details. My PNR is 89VTY4\"\n}\n'"
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Booking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"prompt\": \"I want to cancel my booking\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/v1/airline/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"v1",
+						"airline",
+						"chat"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\n  'http://localhost:8091/v1/airline/chat' \\\n  -H 'accept: */*' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"prompt\": \"I want to cancel my booking\"\n}\n'"
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm Cancellation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"prompt\": \"Yes, I confirm. Proceed with cancellation\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/v1/airline/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"v1",
+						"airline",
+						"chat"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\n  'http://localhost:8091/v1/airline/chat' \\\n  -H 'accept: */*' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"prompt\": \"Yes, I confirm. Proceed with cancellation\"\n}\n'"
+			},
+			"response": []
+		}
+	]
+}

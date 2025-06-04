@@ -390,10 +390,106 @@ DELETE http://localhost:8090/v1/mcp/api-tools/name/{name}
 ```http
 GET http://localhost:8090/v1/mcp/api-tools/name/{name}/exists
 ```
+* **Audit History Log**: Get the audit history log of API tools created, updated or deleted and by whom.
+```http
+GET http://localhost:8090/v1/mcp/api-tools/audit-history
+```
 
 ## Chat client to interact with AI Model and MCP server
 Spring boot project [**airline-chat-bot**](airline-chat-bot) implements the AI Chat client for communicating with an AI Model and MCP Server to assist Mock Airline using natural language.
 It is implemented using [Spring AI](https://spring.io/projects/spring-ai) [Chat Client API](https://docs.spring.io/spring-ai/reference/api/chatclient.html).
 
-Run [**AirlineChatClientApplication**](airline-chat-bot/src/main/java/ai/ksoot/mcp/airline/client/AirlineChatClientApplication.java) as Spring boot application and 
-Access Swagger UI at [http://localhost:8091/swagger-ui/index.html](http://localhost:8091/swagger-ui/index.html) to explore the available REST APIs.
+Run [**AirlineChatClientApplication**](airline-chat-bot/src/main/java/ai/ksoot/mcp/airline/client/AirlineChatClientApplication.java) as Spring boot application
+* Pass the `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` as VM option to use OpenAI or Anthropic AI model respectively. e.g. `-DOPENAI_API_KEY=your_openai_api_key` or `-DANTHROPIC_API_KEY=your_anthropic_api_key`
+* Access Swagger UI at [http://localhost:8091/swagger-ui/index.html](http://localhost:8091/swagger-ui/index.html) to explore the available REST APIs.
+
+### Configurations
+`rest-api-mcp-server` MCP server is configured with its `url` below. 
+```yaml
+spring:
+  ai:
+    mcp:
+      client:
+        name: ${spring.application.name}
+        version: 0.0.1
+        toolcallback.enabled: true
+        sse.connections:
+          rest-api-mcp-server:
+            url: http://localhost:8090
+        request-timeout: 5m
+```
+Chat client can use any AI model that supports MCP tools, such as OpenAI or Anthropic.
+
+#### Using OpenAI model
+Make sure following maven dependencies are added in `pom.xml` file.
+```xml
+<dependency>
+    <groupId>org.springframework.ai</groupId>
+    <artifactId>spring-ai-starter-model-openai</artifactId>
+</dependency>
+```
+Put configuration in `application.yml` file as follows.
+```yaml
+spring:
+  ai:
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY}
+```
+
+#### Using Anthropic AI model
+Make sure following maven dependencies are added in `pom.xml` file.
+```xml
+<dependency>
+    <groupId>org.springframework.ai</groupId>
+    <artifactId>spring-ai-starter-model-anthropic</artifactId>
+</dependency>
+```
+Put configuration in `application.yml` file as follows.
+```yaml
+spring:
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+```
+
+### Conversation with AI Chat Client
+You can use following API to chat with Mock Airline chat assistant.
+
+```http
+GET http://localhost:8090/v1/airline/chat
+```
+Example Request Curl:
+```bash
+curl -X 'POST' \
+  'http://localhost:8091/v1/airline/chat' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "prompt": "Hi"
+}'
+```
+
+**Following is the example conversation with AI Chat client**.
+---------------------------------------------------------------------------------------
+**User**: Hi
+**Assistant**: Hello! How can I assist you today? Are you looking to search for flights or retrieve booking information?  
+
+**User**: I want to travel from Delhi to New York. I want to depart on 2025-06-05, 1 adult and one child
+**Assistant**: I found a flight for you from Delhi to New York on June 5, 2025. Here are the details:
+
+### Flight Details:
+- **Flight Number:** 6E99
+- **Airline:** IndiGo
+- **Departure:** June 5, 2025, at 14:06 (Delhi - Indira Gandhi International Airport)
+- **Arrival:** June 6, 2025, at 14:06 (New York - John F. Kennedy International Airport)
+- **Price:** ₹550.75 (INR)
+- **Luggage:** First bag up to 20Kg included
+
+Would you like to proceed with booking this flight? If so, please provide the following passenger details:
+1. **Adult's First Name**
+2. **Adult's Last Name**
+3. **Child's First Name**
+4. **Child's Last Name**
+  
+**User**: Yes, please book this flight for me. My name is Rajveer Singh and my son is Jordan Singh.
+---------------------------------------------------------------------------------------

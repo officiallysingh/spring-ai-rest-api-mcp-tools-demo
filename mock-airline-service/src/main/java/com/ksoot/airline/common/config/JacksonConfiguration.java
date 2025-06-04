@@ -31,7 +31,7 @@ public class JacksonConfiguration {
     return new MonetaryAmountConverter();
   }
 
-  class MonetaryAmountConverter implements ModelConverter {
+  static class MonetaryAmountConverter implements ModelConverter {
 
     @Override
     public Schema<?> resolve(

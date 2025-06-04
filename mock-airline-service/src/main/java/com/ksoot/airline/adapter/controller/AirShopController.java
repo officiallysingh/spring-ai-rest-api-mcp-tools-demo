@@ -45,7 +45,9 @@ class AirShopController implements AirShopApi {
 
   @Override
   public ResponseEntity<APIResponse<?>> bookFlight(final BookingRequest bookingRequest) {
+    log.info("Booking request received: {}", bookingRequest);
     final Booking booking = this.airShopService.createBooking(bookingRequest);
+    log.info("Booking created: {}", booking);
     final APIResponse<?> apiResponse =
         APIResponse.of("booking", AirlineMappers.INSTANCE.toBookingResponse(booking))
             .addSuccess("Booking created successfully with PNR: " + booking.getPnr());
@@ -60,10 +62,12 @@ class AirShopController implements AirShopApi {
 
   @Override
   public ResponseEntity<BookingResponse> getBooking(final String pnr) {
+    log.info("Get booking request received for PNR: {}", pnr);
     final Booking booking =
         this.airShopService
             .getBooking(pnr)
             .orElseThrow(() -> Problems.newInstance(BOOKING_NOT_FOUND).detailArgs(pnr).throwAble());
+    log.info("Get booking response returned: {}", booking);
     return ResponseEntity.ok(AirlineMappers.INSTANCE.toBookingResponse(booking));
   }
 
@@ -78,7 +82,9 @@ class AirShopController implements AirShopApi {
 
   @Override
   public ResponseEntity<APIResponse<?>> cancelBooking(final String pnr) {
+    log.info("Cancel booking request received for PNR: {}", pnr);
     boolean bookingCancelled = this.airShopService.cancelBooking(pnr);
+    log.info("Booking cancelled: {}", (bookingCancelled ? "Yes" : "No"));
     return bookingCancelled
         ? ResponseEntity.ok(APIResponse.newInstance().addSuccess("Booking cancelled successfully"))
         : ResponseEntity.ok(APIResponse.newInstance().addWarning("Booking already cancelled"));
@@ -87,8 +93,10 @@ class AirShopController implements AirShopApi {
   @Override
   public ResponseEntity<APIResponse<?>> addServiceToBooking(
       final String pnr, final AddServiceRequest addServiceRequest) {
+    log.info("Add service request received for PNR: {}, Service: {}", pnr, addServiceRequest);
     boolean serviceAdded =
         this.airShopService.addServiceToBooking(pnr, addServiceRequest.getService());
+    log.info("Service added: {}", (serviceAdded ? "Yes" : "No"));
     return serviceAdded
         ? ResponseEntity.ok(APIResponse.newInstance().addSuccess("Service added successfully"))
         : ResponseEntity.ok(

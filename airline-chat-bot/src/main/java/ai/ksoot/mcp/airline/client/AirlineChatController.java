@@ -2,13 +2,13 @@ package ai.ksoot.mcp.airline.client;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/airline")
@@ -73,17 +73,23 @@ public class AirlineChatController {
   //  }
 
   @Operation(operationId = "chat", summary = "Chat with Airline assistant.")
-  @GetMapping("/chat")
-  String chat(final ChatRequest chatRequest) {
+  @PostMapping("/chat")
+  String chat(@RequestBody @Valid final ChatRequest chatRequest) {
     log.info("Chat request: {}", chatRequest);
-    String response = this.chatClient.prompt(chatRequest.prompt).call().content();
+    final String response = this.chatClient.prompt(chatRequest.prompt).call().content();
     log.info("Chat response: {}", response);
     return response;
   }
 
-  @Data
-  public class ChatRequest {
+  @Valid
+  @Getter
+  @Setter
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @ToString
+  static class ChatRequest {
 
+    @NotEmpty
     private String prompt;
 
     //    private Map<String, String> variables;
