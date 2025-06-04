@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/audit-history")
+@RequestMapping("/v1/mcp/api-tools/audit-history")
 @Tag(name = "Audit History", description = "query APIs")
 @RequiredArgsConstructor
 class MongoAuditHistoryController {

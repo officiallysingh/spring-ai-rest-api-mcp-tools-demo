@@ -1,0 +1,101 @@
+[
+  {
+    "name": "cancel-booking-by-pnr",
+    "description": "Cancels a Flight booking by PNR",
+    "inputSchema": "{\n  \"$schema\" : \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\" : \"object\",\n  \"properties\" : {\n    \"pnr\" : {\n      \"type\" : \"string\"\n    }\n  },\n  \"required\" : [ \"pnr\" ],\n  \"additionalProperties\" : false\n}",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "PUT",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/bookings/{pnr}/cancel"
+  },
+  {
+    "name": "search-flights",
+    "description": "Search available flights as per simple search criteria.",
+    "inputSchema": "{\n  \"$schema\" : \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\" : \"object\",\n  \"properties\" : {\n    \"airShopRequest\" : {\n      \"type\" : \"object\",\n      \"description\" : \"Search Flight request\",\n      \"properties\" : {\n        \"origin\" : {\n          \"type\" : \"string\",\n          \"description\" : \"Departure airport\",\n          \"enum\" : [ \"JFK\", \"LAX\", \"DEL\", \"BOM\" ],\n          \"example\" : \"DEL\"\n        },\n        \"destination\" : {\n          \"type\" : \"string\",\n          \"description\" : \"Arrival airport\",\n          \"enum\" : [ \"JFK\", \"LAX\", \"DEL\", \"BOM\" ],\n          \"example\" : \"JFK\"\n        },\n        \"departureDate\" : {\n          \"type\" : \"string\",\n          \"format\" : \"date\",\n          \"description\" : \"Departure Date\",\n          \"example\" : \"2025-04-21\"\n        }\n      },\n      \"required\" : [ \"departureDate\", \"destination\", \"origin\" ]\n    }\n  },\n  \"required\" : [ \"airShopRequest\" ],\n  \"additionalProperties\" : false\n}",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "POST",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ],
+      "Content-Type": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/flights",
+    "bodyArg": "airShopRequest"
+  },
+  {
+    "name": "search-bookings",
+    "description": "Search Bookings",
+    "inputSchema": "{\n  \"$schema\" : \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\" : \"object\",\n  \"properties\" : {\n    \"bookingStatus\" : {\n      \"type\" : \"string\",\n      \"description\" : \"Booking Status\",\n      \"enum\" : [ \"CONFIRMED\", \"CANCELLED\", \"PENDING\" ]\n    }\n  },\n  \"additionalProperties\" : false\n}",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "GET",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/bookings",
+    "queryParams": [
+      "bookingStatus"
+    ]
+  },
+  {
+    "name": "book-flight",
+    "description": "Book a Flight",
+    "inputSchema": "{\n  \"$schema\" : \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\" : \"object\",\n  \"properties\" : {\n    \"bookingRequest\" : {\n      \"type\" : \"object\",\n      \"description\" : \"Book Flight request\",\n      \"properties\" : {\n        \"flightNumber\" : {\n          \"type\" : \"string\",\n          \"description\" : \"Flight number\",\n          \"example\" : 60000000\n        },\n        \"passengers\" : {\n          \"type\" : \"array\",\n          \"items\" : {\n            \"type\" : \"object\",\n            \"description\" : \"Passenger details\",\n            \"properties\" : {\n              \"firstName\" : {\n                \"type\" : \"string\",\n                \"description\" : \"Passenger First name\",\n                \"example\" : \"Rajveer\"\n              },\n              \"lastName\" : {\n                \"type\" : \"string\",\n                \"description\" : \"Passenger Last name\",\n                \"example\" : \"Singh\"\n              },\n              \"type\" : {\n                \"type\" : \"string\",\n                \"description\" : \"Passenger type, Adult or Child\",\n                \"enum\" : [ \"ADULT\", \"CHILD\" ],\n                \"example\" : \"ADULT\"\n              }\n            },\n            \"required\" : [ \"firstName\", \"lastName\", \"type\" ]\n          },\n          \"description\" : \"List of Passenger details\"\n        }\n      },\n      \"required\" : [ \"flightNumber\", \"passengers\" ]\n    }\n  },\n  \"required\" : [ \"bookingRequest\" ],\n  \"additionalProperties\" : false\n}",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "POST",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ],
+      "Content-Type": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/bookings",
+    "bodyArg": "bookingRequest"
+  },
+  {
+    "name": "add-service-to-booking",
+    "description": "Add requested Service to Flight Booking",
+    "inputSchema": "{\n  \"$schema\" : \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\" : \"object\",\n  \"properties\" : {\n    \"pnr\" : {\n      \"type\" : \"string\"\n    },\n    \"addServiceRequest\" : {\n      \"type\" : \"object\",\n      \"description\" : \"Add Service request\",\n      \"properties\" : {\n        \"service\" : {\n          \"type\" : \"string\",\n          \"description\" : \"Service\",\n          \"enum\" : [ \"BAG\", \"BAG_ADDITIONAL\", \"MEAL\", \"PRIORITY_BOARDING\", \"LOUNGE_ACCESS\" ]\n        }\n      },\n      \"required\" : [ \"service\" ]\n    }\n  },\n  \"required\" : [ \"pnr\", \"addServiceRequest\" ],\n  \"additionalProperties\" : false\n}",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "POST",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ],
+      "Content-Type": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/bookings/{pnr}/services",
+    "bodyArg": "addServiceRequest"
+  },
+  {
+    "name": "get-booking-by-pnr",
+    "description": "Gets a Flight booking by PNR",
+    "inputSchema": "{\n  \"$schema\" : \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\" : \"object\",\n  \"properties\" : {\n    \"pnr\" : {\n      \"type\" : \"string\"\n    }\n  },\n  \"required\" : [ \"pnr\" ],\n  \"additionalProperties\" : false\n}",
+    "returnDirect": false,
+    "baseUrl": "http://localhost:8092",
+    "httpMethod": "GET",
+    "defaultHeaders": {
+      "Accept": [
+        "application/json"
+      ]
+    },
+    "path": "/v1/airline/bookings/{pnr}"
+  }
+]

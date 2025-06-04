@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ApiToolCallbackRepository extends MongoRepository<ApiToolCallback, String> {
 
-  Optional<ApiToolCallback> findByToolDefinitionName(final String toolName);
+  Optional<ApiToolCallback> findByToolDefinitionName(final String name);
 
-  boolean existsByToolDefinitionName(final String toolName);
+  boolean existsByToolDefinitionName(final String name);
 
-  void deleteByToolDefinitionName(final String toolName);
+  void deleteByToolDefinitionName(final String name);
 }

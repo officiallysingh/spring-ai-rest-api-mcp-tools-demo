@@ -61,12 +61,23 @@ public class ApiToolService {
   }
 
   @Transactional
-  public ApiToolCallback updateApiTool(final String id, final ApiToolUpdateRequest request) {
+  public ApiToolCallback updateApiToolById(final String id, final ApiToolUpdateRequest request) {
 
     final ApiToolCallback apiToolCallback = this.getApiToolById(id);
-    ApiToolDefinition toolDefinition = apiToolCallback.getToolDefinition();
-    toolDefinition.name();
+    this.updateApiTool(apiToolCallback, request);
+    return this.apiToolCallbackRepository.save(apiToolCallback);
+  }
 
+  @Transactional
+  public ApiToolCallback updateApiToolByName(
+      final String name, final ApiToolUpdateRequest request) {
+    final ApiToolCallback apiToolCallback = this.getApiToolByName(name);
+    this.updateApiTool(apiToolCallback, request);
+    return this.apiToolCallbackRepository.save(apiToolCallback);
+  }
+
+  private void updateApiTool(
+      final ApiToolCallback apiToolCallback, final ApiToolUpdateRequest request) {
     Optional.ofNullable(request.getName()).ifPresent(apiToolCallback::setName);
     Optional.ofNullable(request.getDescription()).ifPresent(apiToolCallback::setDescription);
     Optional.ofNullable(request.getInputSchema()).ifPresent(apiToolCallback::setInputSchema);
@@ -78,8 +89,6 @@ public class ApiToolService {
     Optional.ofNullable(request.getQueryParams()).ifPresent(apiToolCallback::setQueryParams);
     Optional.ofNullable(request.getHeaders()).ifPresent(apiToolCallback::setHeaders);
     Optional.ofNullable(request.getBodyArg()).ifPresent(apiToolCallback::setBodyArg);
-
-    return this.apiToolCallbackRepository.save(apiToolCallback);
   }
 
   @Transactional(readOnly = true)

@@ -42,7 +42,7 @@ public interface ApiToolApi extends Api {
             responseCode = SC_200,
             description = "Returns true or false if API Tool exists or not respectively")
       })
-  @GetMapping(path = "/{name}/exists", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/name/{name}/exists", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<Boolean> apiToolExists(
       @Parameter(description = "API Tool name", required = true, example = "search_flights")
           @PathVariable(name = "name")
@@ -111,7 +111,7 @@ public interface ApiToolApi extends Api {
       })
   @GetMapping(path = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<ApiToolResponse> getApiToolByName(
-      @Parameter(description = "API Tool Name", required = true, example = "search_flights")
+      @Parameter(description = "API Tool Name", required = true, example = "search-flights")
           @PathVariable(name = "name")
           final String name);
 
@@ -126,7 +126,7 @@ public interface ApiToolApi extends Api {
   @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<List<ApiToolResponse>> getAllApiTools();
 
-  @Operation(operationId = "update-api-tool", summary = "Updates an API Tool")
+  @Operation(operationId = "update-api-tool-by-id", summary = "Updates an API Tool by Id")
   @ApiResponses(
       value = {
         @ApiResponse(responseCode = "200", description = "API Tool updated successfully"),
@@ -143,14 +143,38 @@ public interface ApiToolApi extends Api {
       path = "/{id}",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<APIResponse<?>> updateApiTool(
+  ResponseEntity<APIResponse<?>> updateApiToolById(
       @Parameter(description = "API Tool Id", required = true, example = "68106d632e1b8a3710692a85")
           @PathVariable(name = "id")
           final String id,
       @Parameter(description = "Update API tool request", required = true) @RequestBody @Valid
           final ApiToolUpdateRequest request);
 
-  @Operation(operationId = "delete-tool-by-id", summary = "Deletes a Tool by id")
+  @Operation(operationId = "update-api-tool-by-name", summary = "Updates an API Tool by Name")
+  @ApiResponses(
+      value = {
+        @ApiResponse(responseCode = "200", description = "API Tool updated successfully"),
+        @ApiResponse(
+            responseCode = SC_400,
+            description = "Bad request",
+            content = @Content(examples = @ExampleObject(BAD_REQUEST_EXAMPLE_RESPONSE))),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Requested API Tool not found",
+            content = @Content(examples = @ExampleObject(NOT_FOUND_EXAMPLE_RESPONSE)))
+      })
+  @PatchMapping(
+      path = "/name/{name}",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  ResponseEntity<APIResponse<?>> updateApiToolByName(
+      @Parameter(description = "API Tool Id", required = true, example = "search-flights")
+          @PathVariable(name = "name")
+          final String name,
+      @Parameter(description = "Update API tool request", required = true) @RequestBody @Valid
+          final ApiToolUpdateRequest request);
+
+  @Operation(operationId = "delete-tool-by-id", summary = "Deletes an API Tool by id")
   @ApiResponses(
       value = {
         @ApiResponse(
@@ -168,7 +192,7 @@ public interface ApiToolApi extends Api {
           @PathVariable(name = "id")
           final String id);
 
-  @Operation(operationId = "delete-tool-by-name", summary = "Deletes a Tool by name")
+  @Operation(operationId = "delete-tool-by-name", summary = "Deletes an API Tool by name")
   @ApiResponses(
       value = {
         @ApiResponse(
@@ -182,7 +206,7 @@ public interface ApiToolApi extends Api {
       })
   @DeleteMapping(path = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<APIResponse<?>> deleteApiToolByName(
-      @Parameter(description = "API Tool Name", required = true, example = "search_flights")
+      @Parameter(description = "API Tool Name", required = true, example = "search-flights")
           @PathVariable(name = "name")
           final String name);
 
