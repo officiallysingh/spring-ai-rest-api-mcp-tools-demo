@@ -424,7 +424,7 @@ A **Resource** [Airport_IATA_Code_Lookup.md](rest-api-mcp-server/src/main/resour
 > MCP server can be used by any MCP implementing AI client irrespective of language of implementation such as Java, Python and Type Script also.
 
 ### Testing MCP server with Claude Desktop
-You can test the MCP server using [Claude Desktop](https://claude.ai/download) by following these steps:
+You can test the MCP server using [Claude Desktop](https://claude.ai/download) by following these steps, for details refer to [MCP docs](https://modelcontextprotocol.io/quickstart/server#testing-your-server-with-claude-for-desktop).
 * Go to **Claude > Settings > Developer > Edit Config**. It will open `claude_desktop_config.json` configuration file. On macOS, it is located at `~/Library/Application Support/Claude/claude_desktop_config.json`.
 * Add the following configuration to the `claude_desktop_config.json` file:
 ```json
@@ -469,7 +469,7 @@ Run [**AirlineChatClientApplication**](airline-chat-bot/src/main/java/ai/ksoot/m
 
 > [!CAUTION]
 > This Chat client demo does not pick the real-time MCP tool changes from the MCP server. 
-> So create the APT tools in MCP server before starting the chat client.
+> So create the API tools in MCP server before starting the chat client.
 
 ### Configurations
 Make sure `rest-api-mcp-server` MCP server is configured with its `url` and `toolcallback.enabled` is set to `true` as given below. 
@@ -547,7 +547,7 @@ curl -X 'POST' \
 ```
 
 **Following is the example conversation with AI Chat client**.  
-Make the chat API call with the below prompts in sequence as given in **_User_** section.  
+Make the chat API call with the below prompts in sequence as given in **_User_** section. 
 Or use Postman Collection [airline-chat-bot.postman_collection.json](Mock%20Airline%20Chat%20assitant.postman_collection.json) and make API calls in sequence.
 > [!NOTE]
 > Change departure date to tomorrow's date in search flight request and replace PNR with your booking PNR in whichever requests applicable.
